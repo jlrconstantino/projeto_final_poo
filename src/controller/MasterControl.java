@@ -5,10 +5,10 @@ import java.time.LocalDate;
 
 import dto.Activity;
 import utils.ActivityType;
-import GUI.content.ContentGUI;
-import GUI.content.LeftMenuGUI;
-import GUI.content.MainGUI;
-import GUI.content.TopMenuGUI;
+import gui.content.ContentGUI;
+import gui.content.LeftMenuGUI;
+import gui.content.MainGUI;
+import gui.content.TopMenuGUI;
 
 /** Controla a interface principal da aplicação. */
 public class MasterControl {

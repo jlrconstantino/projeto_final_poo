@@ -1,9 +1,9 @@
-package GUI.action;
+package gui.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import GUI.content.ContentGUI;
+import gui.content.ContentGUI;
 
 /** Implementa as ações de um botão de uma disciplina. */
 public class DisciplineButtonListener implements ActionListener {

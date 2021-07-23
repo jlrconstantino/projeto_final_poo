@@ -1,4 +1,4 @@
-package GUI.content;
+package gui.content;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -50,7 +50,7 @@ public class TopMenuGUI extends JMenuBar {
 		this.add(semesterMenu, BorderLayout.CENTER);
 	
 		// Mostrador de usuário
-		URL userIconURL = getClass().getResource("../img/user.png");
+		URL userIconURL = getClass().getResource("../images/user.png");
 		ImageIcon userIcon = ImageResizer.getAndResize(userIconURL, userName, 25, 25);
 		userLabel = new JLabel(userName, userIcon, JLabel.CENTER);
 		userLabel.setForeground(Color.WHITE);

@@ -1,4 +1,4 @@
-package GUI.content;
+package gui.content;
 
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;

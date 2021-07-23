@@ -1,4 +1,4 @@
-package GUI.content;
+package gui.content;
 
 /** Interface de grade horária */
 public class TimetableGUI extends ContentBlockGUI {

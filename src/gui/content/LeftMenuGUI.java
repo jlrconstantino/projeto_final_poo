@@ -1,4 +1,4 @@
-package GUI.content;
+package gui.content;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import GUI.action.DisciplineButtonListener;
-import GUI.action.HomeButtonListener;
+import gui.listeners.DisciplineButtonListener;
+import gui.listeners.HomeButtonListener;
 import utils.ImageResizer;
 
 /** Menu lateral */
@@ -54,7 +54,7 @@ public class LeftMenuGUI extends JPanel {
 		this.add(mainPanel);
 		
 		// Rótulo do botão de início
-		URL homeIconURL = getClass().getResource("../img/home.jpg");
+		URL homeIconURL = getClass().getResource("../images/home.jpg");
 		ImageIcon homeIcon = ImageResizer.getAndResize(homeIconURL, "Home", 20, 20); 
 		JLabel homeLabel = new JLabel("Home", homeIcon, JLabel.CENTER);
 		
