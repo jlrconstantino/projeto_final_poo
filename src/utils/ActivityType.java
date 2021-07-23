@@ -11,8 +11,7 @@ public enum ActivityType {
 			case ASSESSMENT: return new String("Avaliação");
 			case WORK: return new String("Trabalho");
 			case EXERCISE: return new String("Exercício");
-			case OTHER: return new String("Outro");
-			default: return new String("NaN");
+			default: return new String("Outro");
 		}
 	}
 }

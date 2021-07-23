@@ -24,6 +24,7 @@ public class EnrolledDiscipline {
 		this.disciplineId = disciplineId;
 		this.offerings = offerings;
 		this.meanCalculator = meanCalculator;
+		this.active = true;
 	}
 	
 	// Métodos acessores
@@ -38,5 +39,8 @@ public class EnrolledDiscipline {
 	}
 	public boolean isActive() {
 		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 }
