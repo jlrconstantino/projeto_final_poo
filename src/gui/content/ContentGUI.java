@@ -7,6 +7,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.SemesterController;
 import dto.Activity;
 
 /** Mostrador do painel da disciplina corrente. */
@@ -60,9 +61,8 @@ public class ContentGUI extends JPanel {
 	
 	// Muda a visualização para o tipo "home"
 	public void displayHome() {
-		if(homeView == false) {
+		if(homeView == false)
 			activities.clean();
-		}
 		bottomLayout.show(bottomPanel, HOME_DISPLAY);
 		homeView = true;
 	}
@@ -70,16 +70,22 @@ public class ContentGUI extends JPanel {
 	
 	// Muda a visualização para o tipo "disciplina"
 	public void displayDiscipline() {
-		if(homeView == true) {
+		if(homeView == true)
 			activities.clean();
-		}
 		bottomLayout.show(bottomPanel, DISCIPLINE_DISPLAY);
 		homeView = false;
 	}
 	
 	
 	// Adição de nova atividade
-	public void addActivity(Activity activity) {
-		activities.addActivity(activity);
+	public void addActivity(Activity a) {
+		activities.addActivity(a);
+	}
+	
+	
+	// Habilita a visualização do semestre informado
+	public void displaySemester(SemesterController sc) {
+		activities.displaySemester(sc);
+		timetable.displaySemester(sc);
 	}
 }

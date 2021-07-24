@@ -4,11 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.net.URL;
+import java.util.Iterator;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import controller.SemesterController;
+import dto.Discipline;
 import gui.listeners.DisciplineButtonListener;
 import gui.listeners.HomeButtonListener;
 import utils.ImageResizer;
@@ -26,9 +27,9 @@ public class LeftMenuGUI extends JPanel {
 
 	// Atributos
 	private static final long serialVersionUID = 4L;
+	private SemesterController currentSemester;
 	private ContentGUI contentReference;
 	private JPanel disciplineDisplay;
-	private GridBagConstraints gbc;
 	
 	// Construtor do painel
 	public LeftMenuGUI(ContentGUI contentReference) {
@@ -75,12 +76,9 @@ public class LeftMenuGUI extends JPanel {
 		this.add(homePanel);
 		
 		// Mostrador de disciplinas
-		disciplineDisplay = new JPanel(new GridBagLayout());
+		disciplineDisplay = new JPanel();
+		disciplineDisplay.setLayout(new BoxLayout(disciplineDisplay, BoxLayout.Y_AXIS));
 		disciplineDisplay.setBackground(Color.LIGHT_GRAY);
-		gbc = new GridBagConstraints();
-		gbc.gridwidth = GridBagConstraints.REMAINDER;
-		gbc.weighty = 450;
-		gbc.insets = new Insets(2, 0, 0, 0);
 		
 		// Lista de rolagem das disciplinas
 		JScrollPane scroller = new JScrollPane(disciplineDisplay);
@@ -90,15 +88,21 @@ public class LeftMenuGUI extends JPanel {
 	
 	
 	// Adiciona uma nova disciplina
-	public void addDiscipline(String name) {
-		JButton button = new JButton(name);
-		button.setPreferredSize(new Dimension(170, 35));
+	public void addDiscipline(Discipline discipline) {
+		JButton button = new JButton(discipline.getId());
+		button.setMaximumSize(new Dimension(178, 36));
+		button.setBorder(BorderFactory.createCompoundBorder(
+				new EmptyBorder(2, 2, 0, 2), 
+				BorderFactory.createLineBorder(new Color(100, 100, 100))
+		));
 		button.setBackground(new Color(200, 200, 200));
 		button.setForeground(new Color(70, 70, 70));
 		button.addActionListener(
-			new DisciplineButtonListener(contentReference)
+			new DisciplineButtonListener(
+				contentReference, discipline
+			)
 		);
-		disciplineDisplay.add(button, gbc);
+		disciplineDisplay.add(button);
 	}
 	
 	
@@ -106,5 +110,17 @@ public class LeftMenuGUI extends JPanel {
 	public void cleanDisciplines() {
 		disciplineDisplay.removeAll();
 		disciplineDisplay.repaint();
+	}
+	
+	
+	// Aciona a visualização das disciplinas do semestre
+	public void displaySemester(SemesterController sc) {
+		if(currentSemester != sc) {
+			currentSemester = sc;
+			cleanDisciplines();
+			Iterator<Discipline> iterator = sc.getDisciplineIterator();
+			while(iterator.hasNext())
+				addDiscipline(iterator.next());
+		}
 	}
 }

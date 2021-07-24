@@ -1,7 +1,9 @@
 package gui.content;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 
+import controller.SemesterController;
 import dto.Activity;
 
 /** Interface das atividades. */
@@ -10,7 +12,7 @@ public class ActivitiesGUI extends ContentBlockGUI {
 	// Constantes
 	private static final long serialVersionUID = 5L;
 	private static final String[] labels = {
-		"Atividade", "Prazo", "Disciplina", "Tipo", "Status"
+		"Atividade", "Data", "Disciplina", "Tipo", "Status"
 	};
 	
 	// Construtor do painel
@@ -29,5 +31,16 @@ public class ActivitiesGUI extends ContentBlockGUI {
 		super.addCell(activity.getDisciplineId());
 		super.addCell(activity.getType().toString());
 		super.addCell(activity.getStatus());
+	}
+	
+	@Override
+	public void displaySemester(SemesterController sc) {
+		if(super.isCurrentSemester(sc) == false) {
+			super.setCurrentSemester(sc);
+			super.clean();
+			Iterator<Activity> iterator = sc.getActivitiesIterator();
+			while(iterator.hasNext())
+				addActivity(iterator.next());
+		}
 	}
 }

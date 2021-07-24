@@ -1,10 +1,11 @@
 package dto;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import utils.ActivityType;
 
-public class Activity {
+public class Activity implements Comparable<Activity> {
 	
 	// Atributos
 	private String name;
@@ -13,7 +14,7 @@ public class Activity {
 	private ActivityType type;
 	private String status;
 	
-	// Construtor
+	// Construtores
 	public Activity(String name, LocalDate date, String disciplineId, ActivityType type, String status) {
 		super();
 		this.name = name;
@@ -29,4 +30,11 @@ public class Activity {
 	public String getDisciplineId() { return disciplineId; }
 	public ActivityType getType() { return type; }
 	public String getStatus() { return status; }
+
+	@Override
+	public int compareTo(Activity o) {
+		return date.format(DateTimeFormatter.BASIC_ISO_DATE).compareTo(
+			o.getDate().format(DateTimeFormatter.BASIC_ISO_DATE)
+		);
+	}
 }

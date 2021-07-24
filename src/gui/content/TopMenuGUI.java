@@ -3,8 +3,6 @@ package gui.content;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 
@@ -15,6 +13,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.border.EmptyBorder;
 
+import controller.SemesterController;
+import gui.listeners.SemesterCreatorListener;
+import gui.listeners.SemesterSelectionListener;
 import utils.ImageResizer;
 
 /** Quadro de menu superior da aplicação. */
@@ -48,6 +49,12 @@ public class TopMenuGUI extends JMenuBar {
 		semesterMenu.setForeground(Color.WHITE);
 		semesterMenu.setFont(new Font(semesterMenu.getFont().getName(), Font.BOLD, 18));
 		this.add(semesterMenu, BorderLayout.CENTER);
+		
+		// Opção de adicionar semestre
+		JMenuItem semesterCreator = new JMenuItem("Novo...");
+		semesterCreator.addActionListener(new SemesterCreatorListener());
+		semesterMenu.addSeparator();
+		semesterMenu.add(semesterCreator);
 	
 		// Mostrador de usuário
 		URL userIconURL = getClass().getResource("../images/user.png");
@@ -66,15 +73,23 @@ public class TopMenuGUI extends JMenuBar {
 	
 	
 	// Adição de semestre
-	public void addSemester() {
+	public void addSemester (
+		SemesterController semester, 
+		LeftMenuGUI leftMenuReference, 
+		ContentGUI contentReference
+	){
 		++semestersAmount;
 		String semesterName = "Semestre " + semestersAmount;
-		JMenuItem semester = new JMenuItem(semesterName);
-		semester.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent e) {	
-				semesterMenu.setText(semesterName);
-			}
-		});
-		semesterMenu.add(semester);
+		JMenuItem semesterButton = new JMenuItem(semesterName);
+		semesterButton.addActionListener (
+			new SemesterSelectionListener(
+				semester, 
+				leftMenuReference, 
+				contentReference, 
+				semesterMenu, 
+				semesterName
+			)
+		);
+		semesterMenu.insert(semesterButton, 0);
 	}
 }

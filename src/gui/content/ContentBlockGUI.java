@@ -1,5 +1,6 @@
 package gui.content;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,12 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import controller.SemesterController;
 import utils.TableLabeler;
 
 public abstract class ContentBlockGUI extends JPanel {
 
 	// Atributos
 	private static final long serialVersionUID = 1492406342347023333L;
+	private SemesterController currentSemester;
 	private JPanel table;
 	
 	// Construtor do painel
@@ -48,7 +51,7 @@ public abstract class ContentBlockGUI extends JPanel {
 		this.add(tableLabeler);
 		
 		// Tabela
-		table = new JPanel(new GridLayout(0, 5));
+		table = new JPanel(new GridLayout(0, tableColumns));
 		table.setBackground(Color.LIGHT_GRAY);
 		
 		// Rolagem da tabela
@@ -68,7 +71,32 @@ public abstract class ContentBlockGUI extends JPanel {
 	protected void addCell(String label) {
 		JPanel output = new JPanel();
 		output.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		output.add(new JLabel(label));
+		output.setLayout(new BorderLayout());
+		output.add(new JLabel(label, JLabel.CENTER), BorderLayout.CENTER);
 		table.add(output);
 	}
+	
+	// Criação de uma célula para a tabela
+	protected void addCell(String label, Color background, Color foreground) {
+		JPanel output = new JPanel();
+		output.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		output.setBackground(background);
+		output.setForeground(foreground);
+		output.setLayout(new BorderLayout());
+		output.add(new JLabel(label, JLabel.CENTER), BorderLayout.CENTER);
+		table.add(output);
+	}
+	
+	// Verificação de semestre atual
+	protected boolean isCurrentSemester(SemesterController sc) {
+		return currentSemester == sc;
+	}
+	
+	// Atualiza o semestre atual
+	protected void setCurrentSemester(SemesterController sc) {
+		currentSemester = sc;
+	}
+	
+	// Implementa visualização gráfica do semestre atual
+	public abstract void displaySemester(SemesterController sc);
 }
