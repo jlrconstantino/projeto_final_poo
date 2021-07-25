@@ -18,28 +18,28 @@ import gui.content.MainGUI;
 import gui.content.TopMenuGUI;
 import mean.ArithmeticMeanCalculator;
 
-/** Controla a interface principal da aplicação. */
+/** Controla a interface principal da aplicaï¿½ï¿½o. */
 public class MasterControl {
 	
-	// Interfaces gráficas
+	// Interfaces grï¿½ficas
 	private static TopMenuGUI topMenu;
 	private static ContentGUI content;
 	private static LeftMenuGUI leftMenu;
 	private static MainGUI mainGUI;
 	
-	// Contém todas as disciplinas que possam ser adicionadas à grade
+	// Contï¿½m todas as disciplinas que possam ser adicionadas ï¿½ grade
 	private static HashMap<String, Discipline> availableDisciplines;
 	
 	// Cria dois semestres artificialmente para testes de interface
 	private static void createTestSemesters() {
 		
-		// Variáveis locais
+		// Variï¿½veis locais
 		SemesterController s1, s2;
 		Discipline discipline;
 		Activity activity;
 		List<DayTimeInterval> offerings;
 		
-		// Inicialização dos semestres
+		// Inicializaï¿½ï¿½o dos semestres
 		s1 = new SemesterController();
 		s2 = new SemesterController();
 		
@@ -134,9 +134,9 @@ public class MasterControl {
 		s1.addActivity(activity);
 		activity = new Activity("Trabalho Y", LocalDate.parse("2021-11-08"), "7500039", ActivityType.WORK, "Finalizado");
 		s1.addActivity(activity);
-		activity = new Activity("Exercício 1", LocalDate.parse("2021-12-06"), "7500039", ActivityType.OTHER, "Em progresso");
+		activity = new Activity("Exercï¿½cio 1", LocalDate.parse("2021-12-06"), "7500039", ActivityType.OTHER, "Em progresso");
 		s1.addActivity(activity);
-		activity = new Activity("Exercício 2", LocalDate.parse("2021-09-24"), "SEL0354", ActivityType.OTHER, "Finalizado");
+		activity = new Activity("Exercï¿½cio 2", LocalDate.parse("2021-09-24"), "SEL0354", ActivityType.OTHER, "Finalizado");
 		s1.addActivity(activity);
 		activity = new Activity("Outro", LocalDate.parse("2021-02-18"), "SMA0801", ActivityType.OTHER, "Pendente");
 		s1.addActivity(activity);
@@ -149,29 +149,29 @@ public class MasterControl {
 		activity = new Activity("Trabalho Z", LocalDate.parse("2021-10-14"), "FCM0117", ActivityType.WORK, "Em progresso");
 		s2.addActivity(activity);
 		
-		// Adição dos semestres à interface
+		// Adiï¿½ï¿½o dos semestres ï¿½ interface
 		topMenu.addSemester(s1, leftMenu, content);
 		topMenu.addSemester(s2, leftMenu, content);
 	}
 	
 	
-	/** Inicializa a aplicação. 
+	/** Inicializa a aplicaï¿½ï¿½o. 
 	 * @throws IOException */
 	public static void main(String[] args) throws IOException {
 		
-		// Interfaces gráficas
-		topMenu = new TopMenuGUI("Usuário de Testes");
+		// Interfaces grï¿½ficas
+		topMenu = new TopMenuGUI("Usuï¿½rio de Testes");
 		content = new ContentGUI();
-		leftMenu = new LeftMenuGUI(content);
+		leftMenu = new LeftMenuGUI(content, availableDisciplines);
 		mainGUI = new MainGUI(topMenu, leftMenu, content);
 		
-		// Aquisição das disciplinas adicionáveis
+		// Aquisiï¿½ï¿½o das disciplinas adicionï¿½veis
 		availableDisciplines = DisciplineCSVParser.parse("data/disciplinas_usp_sao_carlos.csv");
 		
-		// Adição dos dados de teste
+		// Adiï¿½ï¿½o dos dados de teste
 		createTestSemesters();
 		
-		// Inicialização da visualização
+		// Inicializaï¿½ï¿½o da visualizaï¿½ï¿½o
 		mainGUI.setVisible(true);
 	}
 }

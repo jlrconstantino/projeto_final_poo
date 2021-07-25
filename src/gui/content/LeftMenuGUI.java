@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -18,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.SemesterController;
 import dto.Discipline;
+import gui.listeners.AddDisciplineButtonListener;
 import gui.listeners.DisciplineButtonListener;
 import gui.listeners.HomeButtonListener;
 import utils.ImageResizer;
@@ -30,23 +32,24 @@ public class LeftMenuGUI extends JPanel {
 	private SemesterController currentSemester;
 	private ContentGUI contentReference;
 	private JPanel disciplineDisplay;
+	private HashMap<String, Discipline> disciplines;
 	
 	// Construtor do painel
-	public LeftMenuGUI(ContentGUI contentReference) {
+	public LeftMenuGUI(ContentGUI contentReference, HashMap<String, Discipline> disciplines) {
 		
-		// Registra a referência (utilizada para os gatilhos de botão)
+		// Registra a referï¿½ncia (utilizada para os gatilhos de botï¿½o)
 		this.contentReference = contentReference;
 		
 		// Mostrador em forma de lista vertical
 		this.setBorder(new EmptyBorder(70, 20, 0, 0));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		// Rótulo da lista
+		// Rï¿½tulo da lista
 		JLabel mainLabel = new JLabel("Disciplinas");
 		mainLabel.setForeground(Color.WHITE);
 		mainLabel.setFont(new Font(mainLabel.getFont().getName(), Font.BOLD, 14));
 		
-		// Painel do rótulo da lista
+		// Painel do rï¿½tulo da lista
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBackground(Color.BLACK);
 		mainPanel.setPreferredSize(new Dimension(180, 30));
@@ -54,12 +57,12 @@ public class LeftMenuGUI extends JPanel {
 		mainPanel.add(mainLabel);
 		this.add(mainPanel);
 		
-		// Rótulo do botão de início
+		// Rï¿½tulo do botï¿½o de inï¿½cio
 		URL homeIconURL = getClass().getResource("../images/home.jpg");
 		ImageIcon homeIcon = ImageResizer.getAndResize(homeIconURL, "Home", 20, 20); 
 		JLabel homeLabel = new JLabel("Home", homeIcon, JLabel.CENTER);
 		
-		// Botão de início
+		// Botï¿½o de inï¿½cio
 		JButton homeButton = new JButton();
 		homeButton.setLayout(new BorderLayout());
 		homeButton.setBackground(new Color(160, 160, 160));
@@ -69,11 +72,30 @@ public class LeftMenuGUI extends JPanel {
 		);
 		homeButton.add(homeLabel, BorderLayout.CENTER);
 		
-		// Painel de início
+		// Painel de inï¿½cio
 		JPanel homePanel = new JPanel(new BorderLayout());
 		homePanel.setMaximumSize(new Dimension(180, 35));
 		homePanel.add(homeButton, BorderLayout.CENTER);
 		this.add(homePanel);
+
+		// Rï¿½tulo do botï¿½o de dicionar disciplina
+		JLabel addDisciplineLabel = new JLabel("+ Adicionar disciplina", JLabel.LEFT);
+		
+		// Botï¿½o de adicionar disciplina
+		JButton addDisciplineButton = new JButton();
+		addDisciplineButton.setLayout(new BorderLayout());
+		addDisciplineButton.setBackground(new Color(160, 160, 160));
+		addDisciplineButton.setPreferredSize(new Dimension(180, 35));
+		addDisciplineButton.addActionListener(
+			new AddDisciplineButtonListener(this, disciplines)
+		);
+		addDisciplineButton.add(addDisciplineLabel, BorderLayout.CENTER);
+
+		// Painel do adicionar disciplina
+		JPanel addDisciplinePanel = new JPanel(new BorderLayout());
+		addDisciplinePanel.setMaximumSize(new Dimension(180, 35));
+		addDisciplinePanel.add(addDisciplineButton, BorderLayout.CENTER);
+		this.add(addDisciplinePanel);
 		
 		// Mostrador de disciplinas
 		disciplineDisplay = new JPanel();
@@ -113,7 +135,7 @@ public class LeftMenuGUI extends JPanel {
 	}
 	
 	
-	// Aciona a visualização das disciplinas do semestre
+	// Aciona a visualizaï¿½ï¿½o das disciplinas do semestre
 	public void displaySemester(SemesterController sc) {
 		if(currentSemester != sc) {
 			currentSemester = sc;
@@ -122,5 +144,10 @@ public class LeftMenuGUI extends JPanel {
 			while(iterator.hasNext())
 				addDiscipline(sc, iterator.next());
 		}
+	}
+
+	public SemesterController getCurrentSemester()
+	{
+		return this.currentSemester;
 	}
 }
