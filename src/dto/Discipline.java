@@ -45,6 +45,9 @@ public class Discipline implements Comparable<Discipline> {
 	public void setOfferings(List<DayTimeInterval> offerings) {
 		this.offerings = offerings;
 	}
+	public void addGrade(float grade) {
+		meanCalculator.addValue(grade);
+	}
 	public float getMean() {
 		if(meanCalculator == null)
 			throw new UnsupportedOperationException("There is no defined mean calculator.");

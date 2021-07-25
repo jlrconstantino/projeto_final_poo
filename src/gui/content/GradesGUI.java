@@ -45,7 +45,7 @@ public class GradesGUI extends JPanel {
 	private JLabel assessmentsMeanLabel;
 	private JLabel worksMeanLabel;
 	private JLabel othersMeanLabel;
-	private JLabel finalGradeLabel;
+	private JLabel finalMeanLabel;
 	
 	// Construtor do painel
 	public GradesGUI() {
@@ -107,14 +107,14 @@ public class GradesGUI extends JPanel {
 		container.add(createGradePanel("Outros", othersTable, othersMeanLabel), gbc);
 		
 		// Rótulo da nota
-		finalGradeLabel = new JLabel(MEAN_LABELS[FINAL] + "0.0");
-		finalGradeLabel.setForeground(Color.WHITE);
+		finalMeanLabel = new JLabel(MEAN_LABELS[FINAL] + "0.0");
+		finalMeanLabel.setForeground(Color.WHITE);
 		
 		// Mostrador da nota
 		JPanel finalGradePanel = new JPanel();
 		finalGradePanel.setBackground(new Color(120, 120, 120));
 		finalGradePanel.setMaximumSize(new Dimension(760, 30));
-		finalGradePanel.add(finalGradeLabel, JLabel.CENTER);
+		finalGradePanel.add(finalMeanLabel, JLabel.CENTER);
 		this.add(finalGradePanel);
 	}
 	
@@ -187,20 +187,34 @@ public class GradesGUI extends JPanel {
 		othersMeanLabel.setText(MEAN_LABELS[OTHERS] + value);
 	}
 	
+	// Atualiza a média final
+	private void updateFinalMean(Discipline d, Iterator<Activity> activities) {
+		while(activities.hasNext())
+			d.addGrade(activities.next().getGrade());
+		float mean = d.getMean();
+		finalMeanLabel.setText(MEAN_LABELS[FINAL] + mean);
+	}
+
 	
 	// Adiciona uma atividade à tabela correspondente
 	private void addActivity(Activity a) {
 		switch(a.getType()) {
+		
+			// Avaliação
 			case ASSESSMENT:
 				addCell(assessmentsTable, a.getName());
 				addCell(assessmentsTable, "" + a.getGrade());
 				updateAssessmentsMean((float) 0.0);
 				break;
+				
+			// Trabalho
 			case WORK:
 				addCell(worksTable, a.getName());
 				addCell(worksTable, "" + a.getGrade());
 				updateWorksMean((float) 0.0);
 				break;
+				
+			// Outros
 			default:
 				addCell(othersTable, a.getName());
 				addCell(othersTable, "" + a.getGrade());
@@ -234,6 +248,7 @@ public class GradesGUI extends JPanel {
 			disciplineLabel.setText(discipline.getName());
 			while(activities.hasNext())
 				addActivity(activities.next());
+			updateFinalMean(discipline, activities);
 		}
 	}
 }
