@@ -2,6 +2,7 @@ package gui.content;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.util.Iterator;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -9,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.SemesterController;
 import dto.Activity;
+import dto.Discipline;
 
 /** Mostrador do painel da disciplina corrente. */
 public class ContentGUI extends JPanel {
@@ -20,6 +22,7 @@ public class ContentGUI extends JPanel {
 	private TimetableGUI timetable;
 	private GradesGUI grades;
 	private boolean homeView;
+	private Discipline lastDiscipline;
 	
 	// Constantes de identificação
 	private static final long serialVersionUID = 6L;
@@ -61,19 +64,27 @@ public class ContentGUI extends JPanel {
 	
 	// Muda a visualização para o tipo "home"
 	public void displayHome() {
-		if(homeView == false)
-			activities.clean();
-		bottomLayout.show(bottomPanel, HOME_DISPLAY);
-		homeView = true;
+		if(homeView == false) {
+			activities.displayCurrentSemester();
+			bottomLayout.show(bottomPanel, HOME_DISPLAY);
+			homeView = true;
+		}
 	}
 	
 	
-	// Muda a visualização para o tipo "disciplina"
-	public void displayDiscipline() {
-		if(homeView == true)
-			activities.clean();
-		bottomLayout.show(bottomPanel, DISCIPLINE_DISPLAY);
-		homeView = false;
+	/** Muda a visualização para o tipo "disciplina".
+	 * @param discipline = referência para a disciplina de interesse;
+	 * @param iterator = iterador para as atividades associadas a essa atividade. */
+	public void displayDiscipline(Discipline discipline, Iterator<Activity> iterator) {
+		if(lastDiscipline != discipline || homeView == true) {
+			lastDiscipline = discipline;
+			grades.displayDiscipline(discipline, iterator);
+			activities.displayDiscipline(discipline);
+			if(homeView == true) {
+				bottomLayout.show(bottomPanel, DISCIPLINE_DISPLAY);
+				homeView = false;
+			}
+		}
 	}
 	
 	

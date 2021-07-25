@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -13,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import controller.SemesterController;
+import dto.Activity;
+import generic.interfaces.Filter;
 import utils.TableLabeler;
 
 public abstract class ContentBlockGUI extends JPanel {
@@ -41,18 +44,14 @@ public abstract class ContentBlockGUI extends JPanel {
 		labelPanel.setBackground(Color.BLACK);
 		labelPanel.setPreferredSize(new Dimension(760, 30));
 		labelPanel.setMaximumSize(new Dimension(760, 30));
-		labelPanel.add(mainLabel);
+		labelPanel.add(mainLabel, JLabel.CENTER);
 		this.add(labelPanel);
 		
 		// Rótulos da tabela
-		TableLabeler tableLabeler = new TableLabeler (
-			760, 28, tableLabels, tableColumns
-		);
-		this.add(tableLabeler);
+		this.add(new TableLabeler(760, 28, tableLabels, tableColumns));
 		
 		// Tabela
 		table = new JPanel(new GridLayout(0, tableColumns));
-		table.setBackground(Color.LIGHT_GRAY);
 		
 		// Rolagem da tabela
 		JScrollPane scroller = new JScrollPane(table);
@@ -97,6 +96,16 @@ public abstract class ContentBlockGUI extends JPanel {
 		currentSemester = sc;
 	}
 	
-	// Implementa visualização gráfica do semestre atual
+	// Retorna iterador para as atividades do semestre atual
+	protected Iterator<Activity> getActivitiesIterator(){
+		return currentSemester.getActivitiesIterator();
+	}
+	
+	// Retorna iterador filtrado para as atividades do semestre atual
+	protected Iterator<Activity> getActivitiesIterator(Filter<Activity> filter){
+		return currentSemester.getActivitiesIterator(filter);
+	}
+	
+	// Implementa visualização gráfica do semestre informado
 	public abstract void displaySemester(SemesterController sc);
 }

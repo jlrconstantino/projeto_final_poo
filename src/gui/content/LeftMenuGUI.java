@@ -88,7 +88,7 @@ public class LeftMenuGUI extends JPanel {
 	
 	
 	// Adiciona uma nova disciplina
-	public void addDiscipline(Discipline discipline) {
+	public void addDiscipline(SemesterController sc, Discipline discipline) {
 		JButton button = new JButton(discipline.getId());
 		button.setMaximumSize(new Dimension(178, 36));
 		button.setBorder(BorderFactory.createCompoundBorder(
@@ -99,7 +99,7 @@ public class LeftMenuGUI extends JPanel {
 		button.setForeground(new Color(70, 70, 70));
 		button.addActionListener(
 			new DisciplineButtonListener(
-				contentReference, discipline
+				contentReference, sc, discipline
 			)
 		);
 		disciplineDisplay.add(button);
@@ -120,7 +120,7 @@ public class LeftMenuGUI extends JPanel {
 			cleanDisciplines();
 			Iterator<Discipline> iterator = sc.getDisciplineIterator();
 			while(iterator.hasNext())
-				addDiscipline(iterator.next());
+				addDiscipline(sc, iterator.next());
 		}
 	}
 }

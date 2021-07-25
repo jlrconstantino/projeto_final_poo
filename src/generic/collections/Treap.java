@@ -42,23 +42,37 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	// Iterador de árvore Treap
 	private static class TreapIterator<T> implements Iterator<T>{
 		
-		// Pilha interna para controle
-		// OBS: carrega-se a árvore inteira em pilha
+		// Foça interna para controle
+		// OBS: carrega-se a árvore inteira em fila
 		private Queue<T> queue;
 		
-		// Carrega a árvore em uma pilha recursivamente
-		private void loadStack(Node<T> node) {
+		// Carrega a árvore em uma fila recursivamente
+		private void loadQueue(Node<T> node) {
 			if(node != null) {
-				loadStack(node.left);
+				loadQueue(node.left);
 				queue.add(node.key);
-				loadStack(node.right);
+				loadQueue(node.right);
 			}
 		}
 		
-		// Construtor
+		// Carrega a árvore em uma fila recursivamente com filtro
+		private void loadQueue(Node<T> node, Filter<T> f) {
+			if(node != null) {
+				loadQueue(node.left, f);
+				if(f.filter(node.key) == true)
+					queue.add(node.key);
+				loadQueue(node.right, f);
+			}
+		}
+		
+		// Construtores
 		public TreapIterator(Node<T> root){
 			queue = new LinkedList<T>();
-			loadStack(root);
+			loadQueue(root);
+		}
+		public TreapIterator(Node<T> root, Filter<T> f){
+			queue = new LinkedList<T>();
+			loadQueue(root, f);
 		}
 		
 		@Override
@@ -445,5 +459,11 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	@Override
 	public Iterator<T> iterator() {
 		return new TreapIterator<T>(root);
+	}
+	
+	
+	// Iterador com filtro
+	public Iterator<T> iterator(Filter<T> filter){
+		return new TreapIterator<T>(root, filter);
 	}
 }

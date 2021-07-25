@@ -7,6 +7,7 @@ import dto.DayTimeInterval;
 import dto.Discipline;
 import dto.TimetableRow;
 import generic.collections.Treap;
+import generic.interfaces.Filter;
 
 /** Representa e gerencia um semestre. */
 public class SemesterController {
@@ -51,6 +52,11 @@ public class SemesterController {
 	// Retorna iterador para as atividades
 	public Iterator<Activity> getActivitiesIterator(){
 		return activities.iterator();
+	}
+	
+	// Retorna iterador filtrado para as atividades
+	public Iterator<Activity> getActivitiesIterator(Filter<Activity> filter){
+		return activities.iterator(filter);
 	}
 	
 	// Retorna iterador para as linhas da grade horária

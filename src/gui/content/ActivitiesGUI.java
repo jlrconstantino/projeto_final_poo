@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import controller.SemesterController;
 import dto.Activity;
+import dto.Discipline;
 
 /** Interface das atividades. */
 public class ActivitiesGUI extends ContentBlockGUI {
@@ -15,10 +16,12 @@ public class ActivitiesGUI extends ContentBlockGUI {
 		"Atividade", "Data", "Disciplina", "Tipo", "Status"
 	};
 	
+	
 	// Construtor do painel
 	public ActivitiesGUI() {
 		super("Atividades", labels, 5);
 	}
+	
 	
 	// Adição de nova atividade
 	public void addActivity(Activity activity) {
@@ -33,6 +36,16 @@ public class ActivitiesGUI extends ContentBlockGUI {
 		super.addCell(activity.getStatus());
 	}
 	
+	
+	// Implementa visualização do semestre atual
+	public void displayCurrentSemester() {
+		super.clean();
+		Iterator<Activity> iterator = super.getActivitiesIterator();
+		while(iterator.hasNext())
+			addActivity(iterator.next());
+	}
+	
+	
 	@Override
 	public void displaySemester(SemesterController sc) {
 		if(super.isCurrentSemester(sc) == false) {
@@ -42,5 +55,16 @@ public class ActivitiesGUI extends ContentBlockGUI {
 			while(iterator.hasNext())
 				addActivity(iterator.next());
 		}
+	}
+	
+	
+	// Implementa visualização das atividades de uma disciplina
+	public void displayDiscipline(Discipline discipline) {
+		super.clean();
+		Iterator<Activity> iterator = super.getActivitiesIterator (
+			(Activity a) -> a.getDisciplineId().compareTo(discipline.getId()) == 0
+		);
+		while(iterator.hasNext())
+			addActivity(iterator.next());
 	}
 }

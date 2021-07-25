@@ -134,9 +134,9 @@ public class MasterControl {
 		s1.addActivity(activity);
 		activity = new Activity("Trabalho Y", LocalDate.parse("2021-11-08"), "7500039", ActivityType.WORK, "Finalizado");
 		s1.addActivity(activity);
-		activity = new Activity("Exercício 1", LocalDate.parse("2021-12-06"), "7500039", ActivityType.EXERCISE, "Em progresso");
+		activity = new Activity("Exercício 1", LocalDate.parse("2021-12-06"), "7500039", ActivityType.OTHER, "Em progresso");
 		s1.addActivity(activity);
-		activity = new Activity("Exercício 2", LocalDate.parse("2021-09-24"), "SEL0354", ActivityType.EXERCISE, "Finalizado");
+		activity = new Activity("Exercício 2", LocalDate.parse("2021-09-24"), "SEL0354", ActivityType.OTHER, "Finalizado");
 		s1.addActivity(activity);
 		activity = new Activity("Outro", LocalDate.parse("2021-02-18"), "SMA0801", ActivityType.OTHER, "Pendente");
 		s1.addActivity(activity);
