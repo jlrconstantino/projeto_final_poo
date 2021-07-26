@@ -16,17 +16,17 @@ import javax.swing.border.EmptyBorder;
 
 import gui.listeners.AddDisciplineButtonListener;
 
-/** Quadro principal da aplicação. */
+/** Quadro principal da aplicaï¿½ï¿½o. */
 public class MainGUI extends JFrame {
 
 	// ID do quadro
 	private static final long serialVersionUID = 1L;
 	
-	// Atributos para alternar visualização dos paineis centrais
+	// Atributos para alternar visualizaï¿½ï¿½o dos paineis centrais
 	private JPanel centralPanel;
 	private CardLayout centralPanelLayout;
 	
-	// Constantes para visualização dos paineis
+	// Constantes para visualizaï¿½ï¿½o dos paineis
 	private static final String SHOW_CONTENT = "content";
 	private static final String SHOW_DISCIPLINE_ADDER = "discipline_adder";
 
@@ -37,18 +37,18 @@ public class MainGUI extends JFrame {
 	public MainGUI (
 		TopMenuGUI topMenu, 
 		LeftMenuGUI leftMenu, 
-		ContentGUI content,
-		DisciplineAdderGUI disciplineAdder
+		ContentGUI content
 	) throws IOException {
 
 		this.leftMenu = leftMenu;
+		DisciplineAdderGUI disciplineAdder = new DisciplineAdderGUI(this);//disciplineaddergui(Maingui)
 		this.disciplineAdder = disciplineAdder;
 
-		// Tamanho e localização
+		// Tamanho e localizaï¿½ï¿½o
 		this.setSize(1024, 640);
 		this.setLocation(60, 60);
 		
-		// Operações de fechamento e de redimensionamento
+		// Operaï¿½ï¿½es de fechamento e de redimensionamento
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		
@@ -61,7 +61,7 @@ public class MainGUI extends JFrame {
 
 		// Rotulo do botao de dicionar disciplina
 		JLabel addDisciplineLabel = new JLabel("+ Adicionar disciplina", JLabel.LEFT);		
-		// Botão de adicionar disciplina
+		// Botï¿½o de adicionar disciplina
 		JButton addDisciplineButton = new JButton();
 		addDisciplineButton.setLayout(new BorderLayout());
 		addDisciplineButton.setBackground(new Color(160, 160, 160));
@@ -90,19 +90,23 @@ public class MainGUI extends JFrame {
 		bottomPanel.add(centralPanel, BorderLayout.CENTER);
 		this.add(bottomPanel);
 		
-		// Por padrão, inicia com visualização do conteúdo
+		// Por padrï¿½o, inicia com visualizaï¿½ï¿½o do conteï¿½do
 		showContent();
 	}
 	
-	// Implementa a visualização do conteúdo do semestre
+	// Implementa a visualizaï¿½ï¿½o do conteï¿½do do semestre
 	public void showContent() {
 		centralPanelLayout.show(centralPanel, SHOW_CONTENT);
 	}
 	
-	// Implementa a visualização do adicionador de disciplinas
+	// Implementa a visualizaï¿½ï¿½o do adicionador de disciplinas
 	public void showDisciplineAdder() {
-		disciplineAdder.setSemester(this);
 		centralPanelLayout.show(centralPanel, SHOW_DISCIPLINE_ADDER);
+	}
+
+	public LeftMenuGUI getLeftMenu()
+	{
+		return this.leftMenu;
 	}
 
 }

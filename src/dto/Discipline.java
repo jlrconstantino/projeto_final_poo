@@ -6,9 +6,9 @@ import java.util.List;
 import mean.MeanCalculator;
 
 /**
- * Representação da disciplina oferecida ao usuário: apresenta 
- * uma disciplina do banco de dados, porém apresenta informações 
- * específicas ao contexto em que está sendo lecionada.
+ * Representaï¿½ï¿½o da disciplina oferecida ao usuï¿½rio: apresenta 
+ * uma disciplina do banco de dados, porï¿½m apresenta informaï¿½ï¿½es 
+ * especï¿½ficas ao contexto em que estï¿½ sendo lecionada.
  * */
 public class Discipline implements Comparable<Discipline> {
 	
@@ -32,7 +32,7 @@ public class Discipline implements Comparable<Discipline> {
 		this.meanCalculator = null;
 	}
 	
-	// Métodos acessores
+	// Mï¿½todos acessores
 	public String getName() {
 		return name;
 	}
@@ -40,6 +40,8 @@ public class Discipline implements Comparable<Discipline> {
 		return id;
 	}
 	public Iterator<DayTimeInterval> getOfferingsIterator(){
+		if(offerings == null)
+			return null;
 		return offerings.iterator();
 	}
 	public void setOfferings(List<DayTimeInterval> offerings) {

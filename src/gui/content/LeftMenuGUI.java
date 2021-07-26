@@ -31,6 +31,7 @@ public class LeftMenuGUI extends JPanel {
 	private SemesterController currentSemester;
 	private ContentGUI contentReference;
 	private JPanel disciplineDisplay;
+
 	
 	// Construtor do painel
 	public LeftMenuGUI(ContentGUI contentReference, HashMap<String, Discipline> disciplines) {
@@ -116,8 +117,8 @@ public class LeftMenuGUI extends JPanel {
 	
 	// Aciona a visualiza��o das disciplinas do semestre
 	public void displaySemester(SemesterController sc) {
-		if(currentSemester != sc) {
-			currentSemester = sc;
+		if(sc != null) {
+			this.currentSemester = sc;
 			cleanDisciplines();
 			Iterator<Discipline> iterator = sc.getDisciplineIterator();
 			while(iterator.hasNext())

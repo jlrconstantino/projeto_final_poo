@@ -165,8 +165,7 @@ public class MasterControl {
 		topMenu = new TopMenuGUI("Usu�rio de Testes");
 		content = new ContentGUI();
 		leftMenu = new LeftMenuGUI(content, availableDisciplines);
-		disciplineAdder = new DisciplineAdderGUI();
-		mainGUI = new MainGUI(topMenu, leftMenu, content, disciplineAdder);
+		mainGUI = new MainGUI(topMenu, leftMenu, content);
 		
 		// Aquisi��o das disciplinas adicion�veis
 		availableDisciplines = DisciplineCSVParser.parse("data/disciplinas_usp_sao_carlos.csv");
