@@ -13,6 +13,7 @@ import dto.Discipline;
 import utils.ActivityType;
 import utils.DisciplineCSVParser;
 import gui.content.ContentGUI;
+import gui.content.DisciplineAdderGUI;
 import gui.content.LeftMenuGUI;
 import gui.content.MainGUI;
 import gui.content.TopMenuGUI;
@@ -26,6 +27,7 @@ public class MasterControl {
 	private static ContentGUI content;
 	private static LeftMenuGUI leftMenu;
 	private static MainGUI mainGUI;
+	private static DisciplineAdderGUI disciplineAdder;
 	
 	// Cont�m todas as disciplinas que possam ser adicionadas � grade
 	private static HashMap<String, Discipline> availableDisciplines;
@@ -163,7 +165,8 @@ public class MasterControl {
 		topMenu = new TopMenuGUI("Usu�rio de Testes");
 		content = new ContentGUI();
 		leftMenu = new LeftMenuGUI(content, availableDisciplines);
-		mainGUI = new MainGUI(topMenu, leftMenu, content);
+		disciplineAdder = new DisciplineAdderGUI();
+		mainGUI = new MainGUI(topMenu, leftMenu, content, disciplineAdder);
 		
 		// Aquisi��o das disciplinas adicion�veis
 		availableDisciplines = DisciplineCSVParser.parse("data/disciplinas_usp_sao_carlos.csv");
