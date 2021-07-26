@@ -19,7 +19,6 @@ import javax.swing.border.EmptyBorder;
 
 import controller.SemesterController;
 import dto.Discipline;
-import gui.listeners.AddDisciplineButtonListener;
 import gui.listeners.DisciplineButtonListener;
 import gui.listeners.HomeButtonListener;
 import utils.ImageResizer;
@@ -32,7 +31,6 @@ public class LeftMenuGUI extends JPanel {
 	private SemesterController currentSemester;
 	private ContentGUI contentReference;
 	private JPanel disciplineDisplay;
-	private HashMap<String, Discipline> disciplines;
 	
 	// Construtor do painel
 	public LeftMenuGUI(ContentGUI contentReference, HashMap<String, Discipline> disciplines) {
@@ -77,25 +75,6 @@ public class LeftMenuGUI extends JPanel {
 		homePanel.setMaximumSize(new Dimension(180, 35));
 		homePanel.add(homeButton, BorderLayout.CENTER);
 		this.add(homePanel);
-
-		// R�tulo do bot�o de dicionar disciplina
-		JLabel addDisciplineLabel = new JLabel("+ Adicionar disciplina", JLabel.LEFT);
-		
-		// Bot�o de adicionar disciplina
-		JButton addDisciplineButton = new JButton();
-		addDisciplineButton.setLayout(new BorderLayout());
-		addDisciplineButton.setBackground(new Color(160, 160, 160));
-		addDisciplineButton.setPreferredSize(new Dimension(180, 35));
-		addDisciplineButton.addActionListener(
-			new AddDisciplineButtonListener(this, disciplines)
-		);
-		addDisciplineButton.add(addDisciplineLabel, BorderLayout.CENTER);
-
-		// Painel do adicionar disciplina
-		JPanel addDisciplinePanel = new JPanel(new BorderLayout());
-		addDisciplinePanel.setMaximumSize(new Dimension(180, 35));
-		addDisciplinePanel.add(addDisciplineButton, BorderLayout.CENTER);
-		this.add(addDisciplinePanel);
 		
 		// Mostrador de disciplinas
 		disciplineDisplay = new JPanel();
