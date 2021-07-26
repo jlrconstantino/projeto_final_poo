@@ -24,7 +24,7 @@ public class ContentGUI extends JPanel {
 	private boolean homeView;
 	private Discipline lastDiscipline;
 	
-	// Constantes de identificação
+	// Constantes de identificaï¿½ï¿½o
 	private static final long serialVersionUID = 6L;
 	public static final String HOME_DISPLAY = "home";
 	public static final String DISCIPLINE_DISPLAY = "discipline";
@@ -37,7 +37,6 @@ public class ContentGUI extends JPanel {
 		
 		// Painel superior
 		JPanel topPanel = new JPanel(new CardLayout());
-		topPanel.setBorder(new EmptyBorder(75, 0, 0, 0));
 		topPanel.setPreferredSize(new Dimension(760, 370));
 		topPanel.setMaximumSize(new Dimension(760, 370));
 		activities = new ActivitiesGUI();
@@ -56,13 +55,13 @@ public class ContentGUI extends JPanel {
 		bottomPanel.add(grades, DISCIPLINE_DISPLAY);
 		this.add(bottomPanel);
 		
-		// Por padrão, inicia com visualização de "home"
+		// Por padrï¿½o, inicia com visualizaï¿½ï¿½o de "home"
 		homeView = true;
 		displayHome();
 	}
 	
 	
-	// Muda a visualização para o tipo "home"
+	// Muda a visualizaï¿½ï¿½o para o tipo "home"
 	public void displayHome() {
 		if(homeView == false) {
 			activities.displayCurrentSemester();
@@ -72,8 +71,8 @@ public class ContentGUI extends JPanel {
 	}
 	
 	
-	/** Muda a visualização para o tipo "disciplina".
-	 * @param discipline = referência para a disciplina de interesse;
+	/** Muda a visualizaï¿½ï¿½o para o tipo "disciplina".
+	 * @param discipline = referï¿½ncia para a disciplina de interesse;
 	 * @param iterator = iterador para as atividades associadas a essa atividade. */
 	public void displayDiscipline(Discipline discipline, Iterator<Activity> iterator) {
 		if(lastDiscipline != discipline || homeView == true) {
@@ -88,13 +87,13 @@ public class ContentGUI extends JPanel {
 	}
 	
 	
-	// Adição de nova atividade
+	// Adiï¿½ï¿½o de nova atividade
 	public void addActivity(Activity a) {
 		activities.addActivity(a);
 	}
 	
 	
-	// Habilita a visualização do semestre informado
+	// Habilita a visualizaï¿½ï¿½o do semestre informado
 	public void displaySemester(SemesterController sc) {
 		activities.displaySemester(sc);
 		timetable.displaySemester(sc);
