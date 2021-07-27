@@ -5,10 +5,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,11 +27,14 @@ public abstract class ContentBlockGUI extends JPanel {
 	private SemesterController currentSemester;
 	private JPanel table;
 	
-	// Construtor do painel
-	public ContentBlockGUI (
+	// Construtor privado do painel
+	private ContentBlockGUI (
 		String blockLabel, 
 		String[] tableLabels, 
-		int tableColumns
+		int tableColumns, 
+		int tableHeight, 
+		String buttonLabel, 
+		ActionListener listener
 	){
 		// Layout vertical
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -55,10 +60,51 @@ public abstract class ContentBlockGUI extends JPanel {
 		
 		// Rolagem da tabela
 		JScrollPane scroller = new JScrollPane(table);
-		scroller.setPreferredSize(new Dimension(760, 190));
-		scroller.setMaximumSize(new Dimension(760, 190));
+		scroller.setPreferredSize(new Dimension(760, tableHeight));
+		scroller.setMaximumSize(new Dimension(760, tableHeight));
 		scroller.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.add(scroller);
+		
+		// Botão de adicionar algo
+		if(buttonLabel != null && listener != null) {
+			
+			// Rótulo
+			JLabel buttonLabeler = new JLabel(buttonLabel, JLabel.CENTER);
+			
+			// Botão
+			JButton button = new JButton();
+			button.setLayout(new BorderLayout());
+			button.setBackground(Color.LIGHT_GRAY);
+			button.add(buttonLabeler, BorderLayout.CENTER);
+			button.setPreferredSize(new Dimension(760, 30));
+			button.setMaximumSize(new Dimension(760, 30));
+			button.addActionListener(listener);
+			
+			// Painel
+			JPanel buttonPanel = new JPanel(new BorderLayout());
+			buttonPanel.setMaximumSize(new Dimension(760, 30));
+			buttonPanel.add(button, BorderLayout.CENTER);
+			buttonPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			this.add(buttonPanel);
+		}
+	}
+	
+	// Construtores públicos do painel
+	public ContentBlockGUI (
+		String blockLabel, 
+		String[] tableLabels, 
+		int tableColumns
+	){
+		this(blockLabel, tableLabels, tableColumns, 190, null, null);
+	}
+	public ContentBlockGUI (
+		String blockLabel, 
+		String[] tableLabels, 
+		int tableColumns, 
+		String buttonLabel, 
+		ActionListener listener
+	){
+		this(blockLabel, tableLabels, tableColumns, 160, buttonLabel, listener);
 	}
 	
 	// Limpeza dos dados da tabela

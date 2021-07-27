@@ -13,6 +13,7 @@ import dto.DayTimeInterval;
 import dto.Discipline;
 import utils.ActivityType;
 import utils.DisciplineCSVParser;
+import gui.content.ActivityAdderGUI;
 import gui.content.CentralPanelGUI;
 import gui.content.ContentGUI;
 import gui.content.DisciplineAdderGUI;
@@ -169,14 +170,15 @@ public class MasterControl {
 		CentralPanelGUI centralPanel = new CentralPanelGUI();
 		
 		// Painel de conteúdo
-		ContentGUI content = new ContentGUI();
+		ContentGUI content = new ContentGUI(centralPanel);
 		
 		// Menu lateral
 		LeftMenuGUI leftMenu = new LeftMenuGUI(centralPanel, content);
 		
-		// Adição do conteúdo do painel central
+		// Adição do conteúdo ao painel central
 		centralPanel.addContent(content);
 		centralPanel.addDisciplineAdder(new DisciplineAdderGUI(leftMenu, centralPanel));
+		centralPanel.addActivityAdder(new ActivityAdderGUI());
 		centralPanel.showContent();
 		
 		// Menu superior

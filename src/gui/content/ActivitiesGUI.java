@@ -6,6 +6,7 @@ import java.util.Iterator;
 import controller.SemesterController;
 import dto.Activity;
 import dto.Discipline;
+import gui.listeners.AddActivityListener;
 
 /** Interface das atividades. */
 public class ActivitiesGUI extends ContentBlockGUI {
@@ -18,8 +19,8 @@ public class ActivitiesGUI extends ContentBlockGUI {
 	
 	
 	// Construtor do painel
-	public ActivitiesGUI() {
-		super("Atividades", labels, 5);
+	public ActivitiesGUI(CentralPanelGUI centralPanel) {
+		super("Atividades", labels, 5, "+ Adicionar Atividade", new AddActivityListener(centralPanel));
 	}
 	
 	

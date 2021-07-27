@@ -37,7 +37,7 @@ public class LeftMenuGUI extends JPanel {
 	// Construtor do painel
 	public LeftMenuGUI(CentralPanelGUI centralPanel, ContentGUI content) {
 		
-		// Registra as referâncias (utilizadas para os gatilhos de botão)
+		// Registra as referências (utilizadas para os gatilhos de botão)
 		this.centralPanel = centralPanel;
 		this.content = content;
 		

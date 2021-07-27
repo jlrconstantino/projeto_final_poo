@@ -92,7 +92,7 @@ public class GradesGUI extends JPanel {
 		container.add(createGradePanel("Outros", othersTable), gbc);
 		
 		// Rótulo da nota
-		meanLabel = new JLabel(MEAN_LABEL + "0.0");
+		meanLabel = new JLabel(MEAN_LABEL + "0.00");
 		meanLabel.setForeground(Color.WHITE);
 		
 		// Mostrador da nota
@@ -153,8 +153,7 @@ public class GradesGUI extends JPanel {
 	private void updateMean(Discipline d, Iterator<Activity> activities) {
 		while(activities.hasNext())
 			d.addGrade(activities.next().getGrade());
-		float mean = d.getMean();
-		meanLabel.setText(MEAN_LABEL + mean);
+		meanLabel.setText(MEAN_LABEL + String.format("%.2f", d.getMean()));
 	}
 
 	
@@ -191,7 +190,7 @@ public class GradesGUI extends JPanel {
 		worksTable.repaint();
 		othersTable.removeAll();
 		othersTable.repaint();
-		meanLabel.setText(MEAN_LABEL + "0.0");
+		meanLabel.setText(MEAN_LABEL + "0.00");
 	}
 	
 	

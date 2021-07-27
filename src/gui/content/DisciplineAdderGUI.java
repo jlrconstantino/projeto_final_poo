@@ -37,8 +37,8 @@ public class DisciplineAdderGUI extends JPanel {
 	public DisciplineAdderGUI(LeftMenuGUI leftMenu, CentralPanelGUI centralPanel) {
 
 		// Layout vertical
-		this.setBorder(new EmptyBorder(65, 0, 0, 0));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setBorder(new EmptyBorder(5, 0, 0, 0));
 
 		// Rótulo do quadro
 		JLabel mainLabel = new JLabel("Adicionar disciplina ao semestre", JLabel.CENTER);
