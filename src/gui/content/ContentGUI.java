@@ -1,7 +1,6 @@
 package gui.content;
 
 import java.awt.CardLayout;
-import java.awt.Dimension;
 import java.util.Iterator;
 
 import javax.swing.BoxLayout;
@@ -24,44 +23,40 @@ public class ContentGUI extends JPanel {
 	private boolean homeView;
 	private Discipline lastDiscipline;
 	
-	// Constantes de identifica��o
+	// Constantes de identificação
 	private static final long serialVersionUID = 6L;
 	public static final String HOME_DISPLAY = "home";
 	public static final String DISCIPLINE_DISPLAY = "discipline";
 	
 	// Construtor do painel
-	public ContentGUI() {
+	public ContentGUI(CentralPanelGUI centralPanel) {
 		
 		// Layout vertical
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		// Painel superior
-		JPanel topPanel = new JPanel(new CardLayout());
-		topPanel.setPreferredSize(new Dimension(760, 370));
-		topPanel.setMaximumSize(new Dimension(760, 370));
-		activities = new ActivitiesGUI();
+		JPanel topPanel = new JPanel();
+		activities = new ActivitiesGUI(centralPanel);
 		topPanel.add(activities);
 		this.add(topPanel);
 		
 		// Painel inferior
 		bottomLayout = new CardLayout();
 		bottomPanel = new JPanel(bottomLayout);
-		bottomPanel.setBorder(new EmptyBorder(25, 0, 0, 0));
-		bottomPanel.setPreferredSize(new Dimension(760, 370));
-		bottomPanel.setMaximumSize(new Dimension(760, 370));
+		bottomPanel.setBorder(new EmptyBorder(15, 0, 0, 0));
 		timetable = new TimetableGUI();
 		grades = new GradesGUI();
 		bottomPanel.add(timetable, HOME_DISPLAY);
 		bottomPanel.add(grades, DISCIPLINE_DISPLAY);
 		this.add(bottomPanel);
 		
-		// Por padr�o, inicia com visualiza��o de "home"
+		// Por padrão, inicia com visualização de "home"
 		homeView = true;
 		displayHome();
 	}
 	
 	
-	// Muda a visualiza��o para o tipo "home"
+	// Muda a visualização para o tipo "home"
 	public void displayHome() {
 		if(homeView == false) {
 			activities.displayCurrentSemester();
@@ -71,8 +66,8 @@ public class ContentGUI extends JPanel {
 	}
 	
 	
-	/** Muda a visualiza��o para o tipo "disciplina".
-	 * @param discipline = refer�ncia para a disciplina de interesse;
+	/** Muda a visualização para o tipo "disciplina".
+	 * @param discipline = referência para a disciplina de interesse;
 	 * @param iterator = iterador para as atividades associadas a essa atividade. */
 	public void displayDiscipline(Discipline discipline, Iterator<Activity> iterator) {
 		if(lastDiscipline != discipline || homeView == true) {
@@ -87,13 +82,13 @@ public class ContentGUI extends JPanel {
 	}
 	
 	
-	// Adi��o de nova atividade
+	// Adição de nova atividade
 	public void addActivity(Activity a) {
 		activities.addActivity(a);
 	}
 	
 	
-	// Habilita a visualiza��o do semestre informado
+	// Habilita a visualização do semestre informado
 	public void displaySemester(SemesterController sc) {
 		activities.displaySemester(sc);
 		timetable.displaySemester(sc);

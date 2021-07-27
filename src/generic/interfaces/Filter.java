@@ -4,7 +4,7 @@ package generic.interfaces;
 public interface Filter<T> {
 	/**
 	 * Filtra um registro segundo certo algoritmo, retornando 
-	 * true se ele for v·lido, ou false em situaÁ„o oposta.
+	 * true se ele for v√°lido, ou false em situa√ß√£o oposta.
 	 * */
 	public abstract boolean filter(T a);
 }

@@ -6,12 +6,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import dto.Activity;
 import dto.DayTimeInterval;
 import dto.Discipline;
 import utils.ActivityType;
 import utils.DisciplineCSVParser;
+import gui.content.ActivityAdderGUI;
+import gui.content.CentralPanelGUI;
 import gui.content.ContentGUI;
 import gui.content.DisciplineAdderGUI;
 import gui.content.LeftMenuGUI;
@@ -19,29 +22,25 @@ import gui.content.MainGUI;
 import gui.content.TopMenuGUI;
 import mean.ArithmeticMeanCalculator;
 
-/** Controla a interface principal da aplica��o. */
+/** Controla a interface principal da aplicação. */
 public class MasterControl {
 	
-	// Interfaces gr�ficas
+	// Interfaces gráfica usada para adicionar os semestres artificiais
 	private static TopMenuGUI topMenu;
-	private static ContentGUI content;
-	private static LeftMenuGUI leftMenu;
-	private static MainGUI mainGUI;
-	private static DisciplineAdderGUI disciplineAdder;
 	
-	// Cont�m todas as disciplinas que possam ser adicionadas � grade
+	// Contém todas as disciplinas que possam ser adicionadas à grade
 	private static HashMap<String, Discipline> availableDisciplines;
 	
 	// Cria dois semestres artificialmente para testes de interface
 	private static void createTestSemesters() {
 		
-		// Vari�veis locais
+		// Variáveis locais
 		SemesterController s1, s2;
 		Discipline discipline;
 		Activity activity;
 		List<DayTimeInterval> offerings;
 		
-		// Inicializa��o dos semestres
+		// Inicializaçãoo dos semestres
 		s1 = new SemesterController();
 		s2 = new SemesterController();
 		
@@ -126,54 +125,72 @@ public class MasterControl {
 		s2.addDiscipline(discipline);
 		
 		// Semestre 1: atividades
-		activity = new Activity("Prova A", LocalDate.parse("2021-07-21"), "FCI0760", ActivityType.ASSESSMENT, "Pendente");
+		activity = new Activity("Prova A", LocalDate.parse("2021-07-21"), "FCI0760", ActivityType.ASSESSMENT, "Pendente", 8.0f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Prova B", LocalDate.parse("2021-11-29"), "SEL0354", ActivityType.ASSESSMENT, "Pendente");
+		activity = new Activity("Prova B", LocalDate.parse("2021-11-29"), "SEL0354", ActivityType.ASSESSMENT, "Pendente", 7.5f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Prova C", LocalDate.parse("2021-04-02"), "7500039", ActivityType.ASSESSMENT, "Finalizada");
+		activity = new Activity("Prova C", LocalDate.parse("2021-04-02"), "7500039", ActivityType.ASSESSMENT, "Finalizada", 8.1f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Trabalho X", LocalDate.parse("2021-09-16"), "SCC0604", ActivityType.WORK, "Em progresso");
+		activity = new Activity("Trabalho X", LocalDate.parse("2021-09-16"), "SCC0604", ActivityType.WORK, "Em progresso", 2.4f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Trabalho Y", LocalDate.parse("2021-11-08"), "7500039", ActivityType.WORK, "Finalizado");
+		activity = new Activity("Trabalho Y", LocalDate.parse("2021-11-08"), "7500039", ActivityType.WORK, "Finalizado", 3.0f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Exerc�cio 1", LocalDate.parse("2021-12-06"), "7500039", ActivityType.OTHER, "Em progresso");
+		activity = new Activity("Exercício 1", LocalDate.parse("2021-12-06"), "7500039", ActivityType.OTHER, "Em progresso", 9.0f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Exerc�cio 2", LocalDate.parse("2021-09-24"), "SEL0354", ActivityType.OTHER, "Finalizado");
+		activity = new Activity("Exercício 2", LocalDate.parse("2021-09-24"), "SEL0354", ActivityType.OTHER, "Finalizado", 7.0f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Outro", LocalDate.parse("2021-02-18"), "SMA0801", ActivityType.OTHER, "Pendente");
+		activity = new Activity("Outro", LocalDate.parse("2021-02-18"), "SMA0801", ActivityType.OTHER, "Pendente", 8.0f, 1.0f);
 		s1.addActivity(activity);
 		
 		// Semestre 2: atividades
-		activity = new Activity("Prova S", LocalDate.parse("2021-10-23"), "SMA0375", ActivityType.ASSESSMENT, "Pendente");
+		activity = new Activity("Prova S", LocalDate.parse("2021-10-23"), "SMA0375", ActivityType.ASSESSMENT, "Pendente", 9.0f);
 		s2.addActivity(activity);
-		activity = new Activity("Prova T", LocalDate.parse("2021-09-30"), "SSC0642", ActivityType.ASSESSMENT, "Finalizada");
+		activity = new Activity("Prova T", LocalDate.parse("2021-09-30"), "SSC0642", ActivityType.ASSESSMENT, "Finalizada", 10.0f);
 		s2.addActivity(activity);
-		activity = new Activity("Trabalho Z", LocalDate.parse("2021-10-14"), "FCM0117", ActivityType.WORK, "Em progresso");
+		activity = new Activity("Trabalho Z", LocalDate.parse("2021-10-14"), "FCM0117", ActivityType.WORK, "Em progresso", 7.0f);
 		s2.addActivity(activity);
 		
-		// Adi��o dos semestres � interface
-		topMenu.addSemester(s1, leftMenu, content);
-		topMenu.addSemester(s2, leftMenu, content);
+		// Adição dos semestres à interface
+		topMenu.addSemester(s1);
+		topMenu.addSemester(s2);
 	}
 	
 	
-	/** Inicializa a aplica��o. 
+	/** Inicializa a aplicação. 
 	 * @throws IOException */
 	public static void main(String[] args) throws IOException {
 		
-		// Interfaces gr�ficas
-		topMenu = new TopMenuGUI("Usu�rio de Testes");
-		content = new ContentGUI();
-		leftMenu = new LeftMenuGUI(content, availableDisciplines);
-		mainGUI = new MainGUI(topMenu, leftMenu, content);
-		
-		// Aquisi��o das disciplinas adicion�veis
+		// Aquisição das disciplinas adicionáveis
 		availableDisciplines = DisciplineCSVParser.parse("data/disciplinas_usp_sao_carlos.csv");
 		
-		// Adi��o dos dados de teste
+		// Força a utilização do Locale brasileiro
+		Locale.setDefault(new Locale("pt", "BR"));
+		
+		// Painel central
+		CentralPanelGUI centralPanel = new CentralPanelGUI();
+		
+		// Painel de conteúdo
+		ContentGUI content = new ContentGUI(centralPanel);
+		
+		// Menu lateral
+		LeftMenuGUI leftMenu = new LeftMenuGUI(centralPanel, content);
+		
+		// Adição do conteúdo ao painel central
+		centralPanel.addContent(content);
+		centralPanel.addDisciplineAdder(new DisciplineAdderGUI(leftMenu, centralPanel));
+		centralPanel.addActivityAdder(new ActivityAdderGUI());
+		centralPanel.showContent();
+		
+		// Menu superior
+		topMenu = new TopMenuGUI(leftMenu, content, centralPanel, "Usuário de Testes");
+		
+		// Quadro da aplicação
+		MainGUI mainGUI = new MainGUI(topMenu, leftMenu, centralPanel);
+		
+		// Adição dos dados de teste
 		createTestSemesters();
 		
-		// Inicializa��o da visualiza��o
+		// Inicialização da visualização
 		mainGUI.setVisible(true);
 	}
 }

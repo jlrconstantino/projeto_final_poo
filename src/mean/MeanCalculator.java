@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Classe de abstraÁ„o de uma metodologia de cÙmputo de mÈdia final. 
- * MantÈm uma lista interna de valores-base de ponto flutuante.
+ * Classe de abstra√ß√£o de uma metodologia de c√¥mputo de m√©dia final. 
+ * Mant√©m uma lista interna de valores-base de ponto flutuante.
  * */
 public abstract class MeanCalculator {
 	
@@ -23,7 +23,7 @@ public abstract class MeanCalculator {
 		return values.iterator();
 	}
 	
-	/** Insere um novo valor ‡ lista. */
+	/** Insere um novo valor √† lista. */
 	public boolean addValue(float value) {
 		return values.add(value);
 	}
@@ -33,6 +33,6 @@ public abstract class MeanCalculator {
 		return values.remove(value);
 	}
 	
-	/** MÈtodo de c·lculo da mÈdia final. */
+	/** M√©todo de c√°lculo da m√©dia final. */
 	public abstract float getMean();
 }

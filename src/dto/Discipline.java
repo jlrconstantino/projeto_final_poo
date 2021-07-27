@@ -4,11 +4,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import mean.MeanCalculator;
+import mean.WeightedMeanCalculator;
 
 /**
- * Representa��o da disciplina oferecida ao usu�rio: apresenta 
- * uma disciplina do banco de dados, por�m apresenta informa��es 
- * espec�ficas ao contexto em que est� sendo lecionada.
+ * Representação da disciplina oferecida ao usuário: apresenta 
+ * uma disciplina do banco de dados, porém apresenta informações 
+ * específicas ao contexto em que está sendo lecionada.
  * */
 public class Discipline implements Comparable<Discipline> {
 	
@@ -32,13 +33,9 @@ public class Discipline implements Comparable<Discipline> {
 		this.meanCalculator = null;
 	}
 	
-	// M�todos acessores
-	public String getName() {
-		return name;
-	}
-	public String getId() {
-		return id;
-	}
+	// Métodos acessores
+	public String getName() { return name; }
+	public String getId() { return id; }
 	public Iterator<DayTimeInterval> getOfferingsIterator(){
 		if(offerings == null)
 			return null;
@@ -47,16 +44,24 @@ public class Discipline implements Comparable<Discipline> {
 	public void setOfferings(List<DayTimeInterval> offerings) {
 		this.offerings = offerings;
 	}
+	public void setMeanCalculator(MeanCalculator meanCalculator) {
+		this.meanCalculator = meanCalculator;
+	}
+	
+	// Encapsulamento das responsabilidades da calculadora de média
 	public void addGrade(float grade) {
 		meanCalculator.addValue(grade);
+	}
+	public void addGrade(float grade, float weight) {
+		if(meanCalculator instanceof WeightedMeanCalculator)
+			((WeightedMeanCalculator) meanCalculator).addValue(grade, weight);
+		else
+			meanCalculator.addValue(grade);
 	}
 	public float getMean() {
 		if(meanCalculator == null)
 			throw new UnsupportedOperationException("There is no defined mean calculator.");
 		return meanCalculator.getMean();
-	}
-	public void setMeanCalculator(MeanCalculator meanCalculator) {
-		this.meanCalculator = meanCalculator;
 	}
 
 	@Override

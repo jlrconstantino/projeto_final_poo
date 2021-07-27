@@ -18,17 +18,34 @@ import gui.listeners.SemesterCreatorListener;
 import gui.listeners.SemesterSelectionListener;
 import utils.ImageResizer;
 
-/** Quadro de menu superior da aplica��o. */
+/** Quadro de menu superior da aplicação. */
 public class TopMenuGUI extends JMenuBar {
 		
-	// Atributos do quadro
+	// Constante de identificação
 	private static final long serialVersionUID = 2L;
+	
+	// Referências para demais GUIs
+	private LeftMenuGUI leftMenu;
+	private ContentGUI content;
+	private CentralPanelGUI centralPanel;
+	
+	// Atributos do painel
 	private JLabel userLabel;
 	private JMenu semesterMenu;
 	private int semestersAmount = 0;
 
 	// Construtor do menu
-	public TopMenuGUI(String userName) throws IOException {
+	public TopMenuGUI(
+		LeftMenuGUI leftMenu, 
+		ContentGUI content, 
+		CentralPanelGUI centralPanel, 
+		String userName
+	) throws IOException {
+		
+		// Captura das referências
+		this.leftMenu = leftMenu;
+		this.content = content;
+		this.centralPanel = centralPanel;
 		
 		// Layout de fluxo
 		this.setLayout(new BorderLayout());
@@ -39,24 +56,24 @@ public class TopMenuGUI extends JMenuBar {
 		// Tamanho da janela
 		this.setSize(1024, 50);
 		
-		// Alinha � direita
+		// Alinha à direita
 		JLabel aligner = new JLabel();
 		aligner.setBorder(new EmptyBorder(0, 420, 0, 0));
 		this.add(aligner, BorderLayout.LINE_START);
 				
 		// Mostrador de semestres
-		semesterMenu = new JMenu("Selecionar Semestre	v");
+		semesterMenu = new JMenu("Semestre X");
 		semesterMenu.setForeground(Color.WHITE);
 		semesterMenu.setFont(new Font(semesterMenu.getFont().getName(), Font.BOLD, 18));
 		this.add(semesterMenu, BorderLayout.CENTER);
 		
-		// Op��o de adicionar semestre
+		// Opção de adicionar semestre
 		JMenuItem semesterCreator = new JMenuItem("Novo...");
-		semesterCreator.addActionListener(new SemesterCreatorListener());
+		semesterCreator.addActionListener(new SemesterCreatorListener(this));
 		semesterMenu.addSeparator();
 		semesterMenu.add(semesterCreator);
 	
-		// Mostrador de usu�rio
+		// Mostrador de usuário
 		URL userIconURL = getClass().getResource("../images/user.png");
 		ImageIcon userIcon = ImageResizer.getAndResize(userIconURL, userName, 25, 25);
 		userLabel = new JLabel(userName, userIcon, JLabel.CENTER);
@@ -66,30 +83,37 @@ public class TopMenuGUI extends JMenuBar {
 	}
 	
 	
-	// Mudan�a de nome de usu�rio
+	// Mudança de nome de usuário
 	public void setUserName(String userName) {
 		userLabel.setText(userName);
 	}
 	
 	
-	// Adi��o de semestre
-	public void addSemester (
-		SemesterController semester, 
-		LeftMenuGUI leftMenuReference, 
-		ContentGUI contentReference
-	){
+	// Visualização de um semestre
+	private void showSemester(SemesterController semester, String name) {
+		centralPanel.showContent();
+		leftMenu.displaySemester(semester);
+		content.displaySemester(semester);
+		semesterMenu.setText(name);
+	}
+	
+	
+	// Adição de semestre
+	public void addSemester(SemesterController semester){
 		++semestersAmount;
 		String semesterName = "Semestre " + semestersAmount;
 		JMenuItem semesterButton = new JMenuItem(semesterName);
 		semesterButton.addActionListener (
 			new SemesterSelectionListener(
 				semester, 
-				leftMenuReference, 
-				contentReference, 
+				leftMenu, 
+				content, 
+				centralPanel, 
 				semesterMenu, 
 				semesterName
 			)
 		);
 		semesterMenu.insert(semesterButton, 0);
+		showSemester(semester, semesterName);
 	}
 }

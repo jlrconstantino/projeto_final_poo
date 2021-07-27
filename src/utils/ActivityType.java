@@ -5,10 +5,10 @@ public enum ActivityType {
 	// Valores
 	ASSESSMENT, WORK, OTHER;
 	
-	// Representação literal
+	// RepresentaÃ§Ã£o literal
 	public String toString() {
 		switch(this) {
-			case ASSESSMENT: return new String("Avaliação");
+			case ASSESSMENT: return new String("AvaliaÃ§Ã£o");
 			case WORK: return new String("Trabalho");
 			default: return new String("Outro");
 		}

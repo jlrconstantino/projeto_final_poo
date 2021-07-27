@@ -10,12 +10,12 @@ import generic.interfaces.Filter;
 import generic.random.RandomNumberGenerator;
 
 /**
- * ¡rvore Heap genÈrica com fator de aleatoriedade: Treap.
- * @author Jo„o Lucas Rodrigues Constantino
+ * √Årvore Heap gen√©rica com fator de aleatoriedade: Treap.
+ * @author Jo√£o Lucas Rodrigues Constantino
  * */
 public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	
-	// NÛ de ·rvore Treap
+	// N√≥ de √°rvore Treap
 	private static class Node<T>{
 		
 		// Atributos
@@ -32,21 +32,21 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 			this.right = right;
 		}
 		
-		// Impress„o
+		// Impress√£o
 		@Override
 		public String toString() {
 			return new String(key.toString());
 		}
 	}
 	
-	// Iterador de ·rvore Treap
+	// Iterador de √°rvore Treap
 	private static class TreapIterator<T> implements Iterator<T>{
 		
-		// FoÁa interna para controle
-		// OBS: carrega-se a ·rvore inteira em fila
+		// Fo√ßa interna para controle
+		// OBS: carrega-se a √°rvore inteira em fila
 		private Queue<T> queue;
 		
-		// Carrega a ·rvore em uma fila recursivamente
+		// Carrega a √°rvore em uma fila recursivamente
 		private void loadQueue(Node<T> node) {
 			if(node != null) {
 				loadQueue(node.left);
@@ -55,7 +55,7 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 			}
 		}
 		
-		// Carrega a ·rvore em uma fila recursivamente com filtro
+		// Carrega a √°rvore em uma fila recursivamente com filtro
 		private void loadQueue(Node<T> node, Filter<T> f) {
 			if(node != null) {
 				loadQueue(node.left, f);
@@ -100,10 +100,10 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	}
 	
 	
-	// Pesquisa de um nÛ a partir de uma chave. Se a busca falhar, retornar· null
+	// Pesquisa de um n√≥ a partir de uma chave. Se a busca falhar, retornar√° null
 	private Node<T> search(T key){
 		
-		// Vari·veis locais
+		// Vari√°veis locais
 		Node<T> searcher = root;
 		int comparator;
 		
@@ -118,7 +118,7 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	}
 	
 	
-	// Pesquisa de um nÛ a partir de um algoritmo customizado
+	// Pesquisa de um n√≥ a partir de um algoritmo customizado
 	private <S> Node<T> search(S key, TwoTypedComparator<S, T> customCMP){
 		Node<T> searcher = root;
 		int comparator;
@@ -133,7 +133,7 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	
 	
 	/**
-	 * Verifica se certo elemento est· contido na Treap.
+	 * Verifica se certo elemento est√° contido na Treap.
 	 * */
 	public boolean contains(T key) {
 		if(key == null) 
@@ -146,7 +146,7 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	
 	
 	/**
-	 * Verifica se certo elemento est· contido na Treap segundo algoritmo customizado.
+	 * Verifica se certo elemento est√° contido na Treap segundo algoritmo customizado.
 	 * */
 	public <S> boolean contains(S key, TwoTypedComparator<S, T> customCMP) {
 		if(key == null || customCMP == null) 
@@ -159,11 +159,11 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	
 	
 	/**
-	 * Busca um elemento, retornando sua forma de string se encontrado, ou null se n„o.
+	 * Busca um elemento, retornando sua forma de string se encontrado, ou null se n√£o.
 	 * */
 	public String searchString(T key) {
 		
-		// EXCE«√O: ponteiro nulo
+		// EXCE√á√ÉO: ponteiro nulo
 		if(key == null) throw new NullPointerException();
 		
 		// Busca e recolha
@@ -176,11 +176,11 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	
 	/**
 	 * Busca um elemento, retornando sua forma de string se encontrado, ou null 
-	 * se n„o. Para tanto, utiliza algoritmo customizado pelo usu·rio.
+	 * se n√£o. Para tanto, utiliza algoritmo customizado pelo usu√°rio.
 	 * */
 	public <S> String searchString(S key, TwoTypedComparator<S, T> customCMP) {
 		
-		// EXCE«√O: ponteiro(s) nulo(s)
+		// EXCE√á√ÉO: ponteiro(s) nulo(s)
 		if(key == null || customCMP == null) 
 			throw new NullPointerException();
 		
@@ -193,12 +193,12 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	
 	
 	/**
-	 * Retorna referÍncia para um membro da ·rvore se encontrado, se n„o, retornar· 
-	 * null. Para tanto, utilizar· um algoritmo comparativo informado pelo usu·rio.
+	 * Retorna refer√™ncia para um membro da √°rvore se encontrado, se n√£o, retornar√° 
+	 * null. Para tanto, utilizar√° um algoritmo comparativo informado pelo usu√°rio.
 	 * */
 	public <S> T access(S key, TwoTypedComparator<S, T> customCMP) {
 		
-		// EXCE«√O: ponteiro(s) nulo(s)
+		// EXCE√á√ÉO: ponteiro(s) nulo(s)
 		if(key == null || customCMP == null) 
 			throw new NullPointerException();
 		
@@ -210,7 +210,7 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	}
 	
 	
-	// RotaÁ„o para a esquerda
+	// Rota√ß√£o para a esquerda
 	private Node<T> leftRotate(Node<T> node) {
 		Node<T> aux = node.right;
 		node.right = aux.left;
@@ -219,7 +219,7 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	}
 	
 	
-	// RotaÁ„o para a direita
+	// Rota√ß√£o para a direita
 	private Node<T> rightRotate(Node<T> node) {
 		Node<T> aux = node.left;
 		node.left = aux.right;
@@ -228,31 +228,31 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	}
 	
 	
-	// LÛgica da inserÁ„o de um elemento
+	// L√≥gica da inser√ß√£o de um elemento
 	private Node<T> insertionBehavior(Node<T> node, T key, float priority){
 		
-		// VerificaÁ„o da raiz
+		// Verifica√ß√£o da raiz
 		if(node == null)
 			return new Node<T>(key, priority, null, null);
 		
-		// Vari·vel de comparaÁ„o
+		// Vari√°vel de compara√ß√£o
 		int comparator = key.compareTo(node.key);
 		
-		// InserÁ„o ‡ esquerda
+		// Inser√ß√£o √† esquerda
 		if(comparator < 0) {
 			node.left = insertionBehavior(node.left, key, priority);
 			if(node.priority < node.left.priority)
 				node = rightRotate(node);
 		}
 		
-		// InserÁ„o ‡ direita
+		// Inser√ß√£o √† direita
 		else if(comparator > 0) {
 			node.right = insertionBehavior(node.right, key, priority);
 			if(node.priority < node.right.priority)
 				node = leftRotate(node);
 		}
 		
-		// FinalizaÁ„o
+		// Finaliza√ß√£o
 		else 
 			return null;
 		return node;
@@ -260,17 +260,17 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	
 	
 	/**
-	 * Adiciona um elemento ‡ Treap, retornando ou true se bem-sucedido, ou false se n„o.
+	 * Adiciona um elemento √† Treap, retornando ou true se bem-sucedido, ou false se n√£o.
 	 * */
 	public boolean add(T key) {
 		
-		// EXCE«√O: ponteiro nulo
+		// EXCE√á√ÉO: ponteiro nulo
 		if(key == null) throw new NullPointerException();
 		
-		// VerificaÁ„o de prÈ-existÍncia
+		// Verifica√ß√£o de pr√©-exist√™ncia
 		boolean validator = contains(key);
 		
-		// InserÁ„o
+		// Inser√ß√£o
 		if(validator == false) {
 			float priority = (float) rng.getRandom();
 			root = insertionBehavior(root, key, priority);
@@ -281,36 +281,36 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	}
 	
 	
-	// LÛgica da remoÁ„o de um elemento
+	// L√≥gica da remo√ß√£o de um elemento
 	private Node<T> deletionBehavior(Node<T> node, T key){
 		
 		// Caso base
 		if(node == null) return null;
 		
-		// ComparaÁ„o com o nÛ corrente
+		// Compara√ß√£o com o n√≥ corrente
 		int comparator = key.compareTo(node.key);
 		if(comparator < 0)
 			node.left = deletionBehavior(node.left, key);
 		else if(comparator > 0)
 			node.right = deletionBehavior(node.right, key);
 		
-		// NÛ com filho ˙nico na direita
+		// N√≥ com filho √∫nico na direita
 		else if(node.left == null) {
 			node = node.right;
 		}
 		
-		// NÛ com filho ˙nico na esquerda
+		// N√≥ com filho √∫nico na esquerda
 		else if(node.right == null) {
 			node = node.left;
 		}
 		
-		// NÛ intermedi·rio com prioridade esquerda
+		// N√≥ intermedi√°rio com prioridade esquerda
 		else if(node.left.priority < node.right.priority) {
 			node = leftRotate(node);
 			node.left = deletionBehavior(node.left, key);
 		}
 		
-		// NÛ intermedi·rio com prioridade direita
+		// N√≥ intermedi√°rio com prioridade direita
 		else {
 			node = rightRotate(node);
 			node.right = deletionBehavior(node.right, key);
@@ -320,36 +320,36 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	}
 	
 	
-	// LÛgica da remoÁ„o de um elemento
+	// L√≥gica da remo√ß√£o de um elemento
 	private <S> Node<T> deletionBehavior (Node<T> node, S key, TwoTypedComparator<S, T> customCMP){
 		
 		// Caso base
 		if(node == null) return null;
 		
-		// ComparaÁ„o com o nÛ corrente
+		// Compara√ß√£o com o n√≥ corrente
 		int comparator = customCMP.compare(key, node.key);
 		if(comparator < 0)
 			node.left = deletionBehavior(node.left, key, customCMP);
 		else if(comparator > 0)
 			node.right = deletionBehavior(node.right, key, customCMP);
 		
-		// NÛ com filho ˙nico na direita
+		// N√≥ com filho √∫nico na direita
 		else if(node.left == null) {
 			node = node.right;
 		}
 		
-		// NÛ com filho ˙nico na esquerda
+		// N√≥ com filho √∫nico na esquerda
 		else if(node.right == null) {
 			node = node.left;
 		}
 		
-		// NÛ intermedi·rio com prioridade esquerda
+		// N√≥ intermedi√°rio com prioridade esquerda
 		else if(node.left.priority < node.right.priority) {
 			node = leftRotate(node);
 			node.left = deletionBehavior(node.left, key, customCMP);
 		}
 		
-		// NÛ intermedi·rio com prioridade direita
+		// N√≥ intermedi√°rio com prioridade direita
 		else {
 			node = rightRotate(node);
 			node.right = deletionBehavior(node.right, key, customCMP);
@@ -360,15 +360,15 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	
 	
 	/**
-	 * Deleta um elemento da Treap, retornando referÍncia para o 
-	 * elemento removido se bem-sucedido, ou null em situaÁ„o oposta.
+	 * Deleta um elemento da Treap, retornando refer√™ncia para o 
+	 * elemento removido se bem-sucedido, ou null em situa√ß√£o oposta.
 	 * */
 	public T delete(T key) {
 		
-		// EXCE«√O: ponteiro nulo
+		// EXCE√á√ÉO: ponteiro nulo
 		if(key == null) throw new NullPointerException();
 		
-		// Busca e remoÁ„o
+		// Busca e remo√ß√£o
 		Node<T> searcher = search(key);
 		if(searcher != null) {
 			root = deletionBehavior(root, key);
@@ -379,17 +379,17 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	
 	
 	/**
-	 * Deleta um elemento da Treap, retornando referÍncia para o 
-	 * elemento removido se bem-sucedido, ou null em situaÁ„o oposta. 
-	 * Para tanto, utiliza algoritmo customizado informado pelo usu·rio.
+	 * Deleta um elemento da Treap, retornando refer√™ncia para o 
+	 * elemento removido se bem-sucedido, ou null em situa√ß√£o oposta. 
+	 * Para tanto, utiliza algoritmo customizado informado pelo usu√°rio.
 	 * */
 	public <S> T delete(S key, TwoTypedComparator<S, T> customCMP) {
 		
-		// EXCE«√O: ponteiro(s) nulo(s)
+		// EXCE√á√ÉO: ponteiro(s) nulo(s)
 		if(key == null || customCMP == null)
 			throw new NullPointerException();
 		
-		// Busca e remoÁ„o
+		// Busca e remo√ß√£o
 		Node<T> searcher = search(key, customCMP);
 		if(searcher != null) {
 			root = deletionBehavior(root, key, customCMP);
@@ -399,7 +399,7 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	}
 	
 	
-	// MÈtodo auxiliar de formataÁ„o em ordem
+	// M√©todo auxiliar de formata√ß√£o em ordem
 	private String auxInOrderFormatter(Node<T> node) {
 		String output = new String();
 		if(node != null) {
@@ -412,7 +412,7 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	
 	
 	/**
-	 * ObtenÁ„o da string de visualizaÁ„o em ordem da Treap.
+	 * Obten√ß√£o da string de visualiza√ß√£o em ordem da Treap.
 	 * */
 	@Override
 	public String toString() {
@@ -427,7 +427,7 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	}
 	
 	
-	// MÈtodo auxiliar de formataÁ„o em ordem com filtro
+	// M√©todo auxiliar de formata√ß√£o em ordem com filtro
 	private String auxInOrderFormatter(Node<T> node, Filter<T> ftr) {
 		String output = new String();
 		if(node != null) {
@@ -441,8 +441,8 @@ public class Treap<T extends Comparable<T>> implements Iterable<T> {
 	
 	
 	/**
-	 * ObtenÁ„o da string de visualizaÁ„o em ordem da Treap.  
-	 * Filtrar· os resultados segundo algoritmo customizado.
+	 * Obten√ß√£o da string de visualiza√ß√£o em ordem da Treap.  
+	 * Filtrar√° os resultados segundo algoritmo customizado.
 	 * */
 	public String toString(Filter<T> ftr) {
 		String output = new String("[");

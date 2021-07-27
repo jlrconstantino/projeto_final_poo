@@ -1,15 +1,15 @@
 package mean;
 
 /**
- * Implementa o cômputo de médias ponderadas a 
+ * Implementa o cÃ´mputo de mÃ©dias ponderadas a 
  * partir de lista de valores de ponto flutuante.
  * */
 public class HarmonicMeanCalculator extends MeanCalculator {
 	
-	// Construtor padrão
+	// Construtor padrÃ£o
 	public HarmonicMeanCalculator() { super(); }
 	
-	// Cômputo da média harmônica
+	// CÃ´mputo da mÃ©dia harmÃ´nica
 	@Override 
 	public float getMean() {
 		// TODO

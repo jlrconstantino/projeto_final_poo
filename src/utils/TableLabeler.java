@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-/** Classe utilit·ria que cria um painel de rÛtulos para uma tabela */
+/** Classe utilit√°ria que cria um painel de r√≥tulos para uma tabela */
 public class TableLabeler extends JPanel {
 	
 	// Atributos
@@ -19,12 +19,12 @@ public class TableLabeler extends JPanel {
 	// Construtor do painel
 	public TableLabeler(int width, int height, String[] labels, int len) {
 		
-		// CaracterÌsticas
+		// Caracter√≠sticas
 		this.setLayout(new GridLayout(1, len));
 		this.setMaximumSize(new Dimension(width, height));
 		this.setBackground(Color.BLACK);
 		
-		// AdiÁ„o dos paineis de rotulaÁ„o
+		// Adi√ß√£o dos paineis de rotula√ß√£o
 		for(int i = 0; i < len; ++i)
 			this.add(createPanel(labels[i]));	
 	}

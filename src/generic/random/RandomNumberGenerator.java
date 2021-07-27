@@ -3,8 +3,8 @@ package generic.random;
 import java.util.Calendar;
 
 /**
- * Produz números pseudoaleatórios por meio 
- * da metodologia das congruências lineares.
+ * Produz nÃºmeros pseudoaleatÃ³rios por meio 
+ * da metodologia das congruÃªncias lineares.
  * */
 public class RandomNumberGenerator {
 
@@ -14,13 +14,13 @@ public class RandomNumberGenerator {
 	private final long BIAS = 453816693;
 	private long seed;
 	
-	/* Construtor padrão: utiliza o tempo 
-	instantâneo para geração da semente */
+	/* Construtor padrÃ£o: utiliza o tempo 
+	instantÃ¢neo para geraÃ§Ã£o da semente */
 	public RandomNumberGenerator() {
 		seed = Calendar.getInstance().getTimeInMillis() % PRIME;
 	}
 	
-	// Utiliza uma semente informada pelo usuário
+	// Utiliza uma semente informada pelo usuÃ¡rio
 	public RandomNumberGenerator(int seed) {
 		if(seed >= 0)
 			this.seed = seed;
