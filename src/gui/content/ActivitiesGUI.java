@@ -19,8 +19,8 @@ public class ActivitiesGUI extends ContentBlockGUI {
 	
 	
 	// Construtor do painel
-	public ActivitiesGUI(CentralPanelGUI centralPanel) {
-		super("Atividades", labels, 5, "+ Adicionar Atividade", new AddActivityListener(centralPanel));
+	public ActivitiesGUI(CentralPanelGUI centralPanel, ActivityAdderGUI activityAdder) {
+		super("Atividades", labels, 5, "+ Adicionar Atividade", new AddActivityListener(centralPanel, activityAdder));
 	}
 	
 	
@@ -49,13 +49,11 @@ public class ActivitiesGUI extends ContentBlockGUI {
 	
 	@Override
 	public void displaySemester(SemesterController sc) {
-		if(super.isCurrentSemester(sc) == false) {
-			super.setCurrentSemester(sc);
-			super.clean();
-			Iterator<Activity> iterator = sc.getActivitiesIterator();
-			while(iterator.hasNext())
-				addActivity(iterator.next());
-		}
+		super.setCurrentSemester(sc);
+		super.clean();
+		Iterator<Activity> iterator = sc.getActivitiesIterator();
+		while(iterator.hasNext())
+			addActivity(iterator.next());
 	}
 	
 	
