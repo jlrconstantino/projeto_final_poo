@@ -36,8 +36,8 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 	
 	// Atributos de apresentação de rótulo
 	private JLabel mainLabel;
-	private static final String ADDER = "Adicionar Disciplina";
-	private static final String MODIFIER = "Modificar Disciplina";
+	private static final String ADDER = "Adicionar Atividade";
+	private static final String MODIFIER = "Modificar Atividade";
 	
 	// Converte datas
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -65,7 +65,7 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 		this.setBorder(new EmptyBorder(18, 0, 0, 0));
 		
 		// Rótulo do quadro
-		mainLabel = new JLabel("Adicionar Atividade");
+		mainLabel = new JLabel(ADDER);
 		mainLabel.setForeground(Color.WHITE);
 		mainLabel.setFont(new Font(mainLabel.getFont().getName(), Font.BOLD, 14));
 		
