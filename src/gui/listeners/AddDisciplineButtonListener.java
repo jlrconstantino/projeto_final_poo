@@ -28,7 +28,7 @@ public class AddDisciplineButtonListener implements ActionListener {
             JOptionPane.showMessageDialog(null, "Selecione um semestre para adicionar a materia primeiramente");
 		else
         {
-            this.centerPanelReference.showDisciplineAdder();
+            this.centralPanel.showDisciplineAdder();
         }
 	}
 }
