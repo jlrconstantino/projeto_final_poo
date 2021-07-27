@@ -36,8 +36,11 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 	
 	// Atributos de apresentação de rótulo
 	private JLabel mainLabel;
-	private static final String ADDER = "Adicionar Atividade";
-	private static final String MODIFIER = "Modificar Atividade";
+	private JLabel buttonLabel;
+	private static final String MAIN_ADDER = "Adicionar Atividade";
+	private static final String MAIN_MODIFIER = "Modificar Atividade";
+	private static final String BUTTON_ADDER = "Adicionar";
+	private static final String BUTTON_MODIFIER = "Modificar";
 	
 	// Converte datas
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -65,7 +68,7 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 		this.setBorder(new EmptyBorder(18, 0, 0, 0));
 		
 		// Rótulo do quadro
-		mainLabel = new JLabel(ADDER);
+		mainLabel = new JLabel(MAIN_ADDER);
 		mainLabel.setForeground(Color.WHITE);
 		mainLabel.setFont(new Font(mainLabel.getFont().getName(), Font.BOLD, 14));
 		
@@ -161,7 +164,7 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 		wrapper.add(weightWrapper, gbc);
 		
 		// Botão de adicionar atividade
-		JLabel buttonLabel = new JLabel("Adicionar", JLabel.CENTER);
+		buttonLabel = new JLabel("Adicionar", JLabel.CENTER);
 		JButton adderButton = new JButton();
 		adderButton.setLayout(new BorderLayout());
 		adderButton.setBackground(new Color(160, 160, 160));
@@ -240,7 +243,8 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 	/** Remonta o painel a partir do semestre corrente. */
 	public void rebuild() {
 		clean();
-		mainLabel.setText(ADDER);
+		mainLabel.setText(MAIN_ADDER);
+		buttonLabel.setText(BUTTON_ADDER);
 		activity = null;
 		Iterator<Discipline> iterator = currentSemester.getDisciplineIterator();
 		while(iterator.hasNext())
@@ -252,7 +256,8 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 	/** Remonta o painel a partir do semestre corrente. Ajusta-se para modificação. */
 	public void rebuild(Activity activity) {
 		fill(activity);
-		mainLabel.setText(MODIFIER);
+		mainLabel.setText(MAIN_MODIFIER);
+		buttonLabel.setText(BUTTON_MODIFIER);
 		this.activity = activity;
 		Iterator<Discipline> iterator = currentSemester.getDisciplineIterator();
 		while(iterator.hasNext())
