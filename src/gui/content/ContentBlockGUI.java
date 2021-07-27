@@ -18,17 +18,26 @@ import javax.swing.JScrollPane;
 import controller.SemesterController;
 import dto.Activity;
 import generic.interfaces.Filter;
+import gui.listeners.ModifyActivityListener;
 import utils.TableLabeler;
 
 public abstract class ContentBlockGUI extends JPanel {
 
-	// Atributos
+	// ID
 	private static final long serialVersionUID = 1492406342347023333L;
+	
+	// Controle do painel
 	private SemesterController currentSemester;
 	private JPanel table;
 	
+	// Referências para os botões
+	private CentralPanelGUI centralPanel;
+	private ActivityAdderGUI activityAdder;
+	
 	// Construtor privado do painel
 	private ContentBlockGUI (
+		CentralPanelGUI centralPanel, 
+		ActivityAdderGUI activityAdder, 
 		String blockLabel, 
 		String[] tableLabels, 
 		int tableColumns, 
@@ -36,6 +45,10 @@ public abstract class ContentBlockGUI extends JPanel {
 		String buttonLabel, 
 		ActionListener listener
 	){
+		// Captura das referências
+		this.centralPanel = centralPanel;
+		this.activityAdder = activityAdder;
+		
 		// Layout vertical
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
@@ -95,16 +108,18 @@ public abstract class ContentBlockGUI extends JPanel {
 		String[] tableLabels, 
 		int tableColumns
 	){
-		this(blockLabel, tableLabels, tableColumns, 190, null, null);
+		this(null, null, blockLabel, tableLabels, tableColumns, 190, null, null);
 	}
 	public ContentBlockGUI (
+		CentralPanelGUI centralPanel, 
+		ActivityAdderGUI activityAdder, 
 		String blockLabel, 
 		String[] tableLabels, 
 		int tableColumns, 
 		String buttonLabel, 
 		ActionListener listener
 	){
-		this(blockLabel, tableLabels, tableColumns, 160, buttonLabel, listener);
+		this(centralPanel, activityAdder, blockLabel, tableLabels, tableColumns, 160, buttonLabel, listener);
 	}
 	
 	// Limpeza dos dados da tabela
@@ -121,6 +136,25 @@ public abstract class ContentBlockGUI extends JPanel {
 		output.add(new JLabel(label, JLabel.CENTER), BorderLayout.CENTER);
 		table.add(output);
 	}
+	
+	
+	// Criação de uma célula para a tabela
+	protected void addCell(Activity activity) {
+		JLabel label = new JLabel(activity.getName(), JLabel.CENTER);
+		JButton button = new JButton();
+		button.setLayout(new BorderLayout());
+		button.setOpaque(false);
+		button.setContentAreaFilled(false);
+		button.setBorderPainted(false);
+		button.add(label, BorderLayout.CENTER);
+		button.addActionListener(new ModifyActivityListener(centralPanel, activityAdder, activity));
+		JPanel output = new JPanel();
+		output.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		output.setLayout(new BorderLayout());
+		output.add(button, BorderLayout.CENTER);
+		table.add(output);
+	}
+	
 	
 	// Criação de uma célula para a tabela
 	protected void addCell(String label, Color background, Color foreground) {

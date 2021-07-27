@@ -20,13 +20,13 @@ public class ActivitiesGUI extends ContentBlockGUI {
 	
 	// Construtor do painel
 	public ActivitiesGUI(CentralPanelGUI centralPanel, ActivityAdderGUI activityAdder) {
-		super("Atividades", labels, 5, "+ Adicionar Atividade", new AddActivityListener(centralPanel, activityAdder));
+		super(centralPanel, activityAdder, "Atividades", labels, 5, "+ Adicionar Atividade", new AddActivityListener(centralPanel, activityAdder));
 	}
 	
 	
 	// Adição de nova atividade
 	public void addActivity(Activity activity) {
-		super.addCell(activity.getName());
+		super.addCell(activity);
 		super.addCell (
 			activity.getDate().format (
 				DateTimeFormatter.ofPattern("dd/MM/yyyy")
@@ -40,10 +40,12 @@ public class ActivitiesGUI extends ContentBlockGUI {
 	
 	// Implementa visualização do semestre atual
 	public void displayCurrentSemester() {
-		super.clean();
-		Iterator<Activity> iterator = super.getActivitiesIterator();
-		while(iterator.hasNext())
-			addActivity(iterator.next());
+		if(super.isCurrentSemester(null) == false) {
+			super.clean();
+			Iterator<Activity> iterator = super.getActivitiesIterator();
+			while(iterator.hasNext())
+				addActivity(iterator.next());
+		}
 	}
 	
 	
