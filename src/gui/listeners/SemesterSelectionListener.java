@@ -6,29 +6,37 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 
 import controller.SemesterController;
+import gui.content.CentralPanelGUI;
 import gui.content.ContentGUI;
 import gui.content.LeftMenuGUI;
 
 public class SemesterSelectionListener implements ActionListener {
 
-	// Atributos (referências externas)
+	// Semestre mantido pelo botão
 	private SemesterController semesterController;
-	private LeftMenuGUI leftMenuReference;
-	private ContentGUI contentReference;
-	private JMenu semesterMenu;
+	
+	// Nome do semestre
 	private String label;
+	
+	// Referências externas
+	private LeftMenuGUI leftMenu;
+	private ContentGUI content;
+	private CentralPanelGUI centralPanel;
+	private JMenu semesterMenu;
 	
 	// Construtor do gatilho
 	public SemesterSelectionListener (
 		SemesterController semesterController, 
-		LeftMenuGUI leftMenuReference, 
-		ContentGUI contentReference, 
+		LeftMenuGUI leftMenu, 
+		ContentGUI content, 
+		CentralPanelGUI centralPanel, 
 		JMenu semesterMenu, 
 		String label
 	){
 		this.semesterController = semesterController;
-		this.leftMenuReference = leftMenuReference;
-		this.contentReference = contentReference;
+		this.leftMenu = leftMenu;
+		this.content = content;
+		this.centralPanel = centralPanel;
 		this.semesterMenu = semesterMenu;
 		this.label = label;
 	}
@@ -37,7 +45,8 @@ public class SemesterSelectionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		semesterMenu.setText(label);
-		leftMenuReference.displaySemester(semesterController);
-		contentReference.displaySemester(semesterController);
+		centralPanel.showContent();
+		leftMenu.displaySemester(semesterController);
+		content.displaySemester(semesterController);
 	}
 }
