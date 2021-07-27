@@ -6,17 +6,21 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.List;
 import java.awt.event.ActionEvent;
+import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import generic.collections.Treap;
 import gui.listeners.AddDisciplineButtonListener;
 import gui.listeners.ConfirmDisciplineButtonListener;
 
@@ -26,8 +30,12 @@ public class DisciplineAdderGUI extends JPanel {
 	private JButton btnAdd = new JButton("Adicionar disciplina");
 	private JTextField nameField = new JTextField();
 	private JTextField codeField = new JTextField();
+	private JComboBox<String> cbMean;
 	private MainGUI mainGUI;
 	private JPanel offeringPanel;
+	private Vector<JTextField> hours = new Vector<JTextField>();
+	private Vector<JTextField> minutes = new Vector<JTextField>();
+	private Vector<JComboBox<String>> days = new Vector<JComboBox<String>>();
 
 
 	// Construtor do painel
@@ -50,6 +58,16 @@ public class DisciplineAdderGUI extends JPanel {
 		labelPanel.setMaximumSize(new Dimension(760, 40));
 		labelPanel.add(mainLabel);
 		this.add(labelPanel);
+		
+		JPanel meanPanel = new JPanel();
+		meanPanel.setLayout(new FlowLayout());
+		meanPanel.setMaximumSize(new Dimension(760, 60));
+		JLabel meanLabel = new JLabel("Tipo de cálculo de média:");
+		String[] meanTypes = {"Média Aritmética", "Média Harmônica"};
+		this.cbMean = new JComboBox<String>(meanTypes);
+		meanPanel.add(meanLabel);
+		meanPanel.add(cbMean);
+		this.add(meanPanel);
 		
 		JPanel textForm = new JPanel();
 		textForm.setLayout(new GridLayout(0, 2, 5, 10));
@@ -80,6 +98,8 @@ public class DisciplineAdderGUI extends JPanel {
 		offeringPanel.setLayout(new BoxLayout(offeringPanel, BoxLayout.Y_AXIS));
 		offeringPanel.setMaximumSize(new Dimension(760, 760));
 		offeringPanel.setBorder(new EmptyBorder(10, 0, 10, 0));
+		
+		
 
 		JLabel offeringLabel = new JLabel("Data e horários de oferecimento:");
 		offeringPanel.add(offeringLabel);
@@ -106,9 +126,9 @@ public class DisciplineAdderGUI extends JPanel {
 		JComboBox<String> cbDays = new JComboBox<String>(days);
 		
 		
-		JPanel offeringPanel = new JPanel();
-		offeringPanel.setLayout(new BoxLayout(offeringPanel, BoxLayout.Y_AXIS));
-		offeringPanel.setMaximumSize(new Dimension(760, 100));
+		JPanel newOfferingPanel = new JPanel();
+		newOfferingPanel.setLayout(new BoxLayout(newOfferingPanel, BoxLayout.Y_AXIS));
+		newOfferingPanel.setMaximumSize(new Dimension(760, 100));
 		
 		JPanel hourPanel = new JPanel();
 		hourPanel.setLayout(new FlowLayout());
@@ -127,10 +147,18 @@ public class DisciplineAdderGUI extends JPanel {
 		dayPanel.add(lblDay);
 		dayPanel.add(cbDays);
 		
-		offeringPanel.add(dayPanel);
-		offeringPanel.add(hourPanel);
+		this.days.add(cbDays);
+		
+		this.hours.add(txtBegHour);
+		this.hours.add(txtEndHour);
+		
+		this.minutes.add(txtBegMinutes);
+		this.minutes.add(txtBegHour);
+		
+		newOfferingPanel.add(dayPanel);
+		newOfferingPanel.add(hourPanel);
 
-		this.offeringPanel.add(offeringPanel);		
+		this.offeringPanel.add(newOfferingPanel);		
 	}
 
 	public String getDisciplineName(){
@@ -156,8 +184,26 @@ public class DisciplineAdderGUI extends JPanel {
 			return "";
 		}
 	}
+	
+	public String getSelectedMeanType()
+	{
+		return this.cbMean.getSelectedItem().toString();
+	}
+	
+	public Vector<JTextField> getHoursVector()
+	{
+		return this.hours;
+	}
+	
+	public Vector<JTextField> getMinutesVector()
+	{
+		return this.minutes;
+	}
 
-
+	public Vector<JComboBox<String>> getDaysVector()
+	{
+		return this.days;
+	}
 	public void clearInputs()
 	{
 		this.codeField.setText("");

@@ -18,7 +18,7 @@ import gui.listeners.SemesterCreatorListener;
 import gui.listeners.SemesterSelectionListener;
 import utils.ImageResizer;
 
-/** Quadro de menu superior da aplicação. */
+/** Quadro de menu superior da aplicaï¿½ï¿½o. */
 public class TopMenuGUI extends JMenuBar {
 		
 	// Atributos do quadro
@@ -39,24 +39,24 @@ public class TopMenuGUI extends JMenuBar {
 		// Tamanho da janela
 		this.setSize(1024, 50);
 		
-		// Alinha à direita
+		// Alinha ï¿½ direita
 		JLabel aligner = new JLabel();
 		aligner.setBorder(new EmptyBorder(0, 420, 0, 0));
 		this.add(aligner, BorderLayout.LINE_START);
 				
 		// Mostrador de semestres
-		semesterMenu = new JMenu("Semestre X");
+		semesterMenu = new JMenu("Selecionar Semestre	v");
 		semesterMenu.setForeground(Color.WHITE);
 		semesterMenu.setFont(new Font(semesterMenu.getFont().getName(), Font.BOLD, 18));
 		this.add(semesterMenu, BorderLayout.CENTER);
 		
-		// Opção de adicionar semestre
+		// Opï¿½ï¿½o de adicionar semestre
 		JMenuItem semesterCreator = new JMenuItem("Novo...");
 		semesterCreator.addActionListener(new SemesterCreatorListener());
 		semesterMenu.addSeparator();
 		semesterMenu.add(semesterCreator);
 	
-		// Mostrador de usuário
+		// Mostrador de usuï¿½rio
 		URL userIconURL = getClass().getResource("../images/user.png");
 		ImageIcon userIcon = ImageResizer.getAndResize(userIconURL, userName, 25, 25);
 		userLabel = new JLabel(userName, userIcon, JLabel.CENTER);
@@ -66,13 +66,13 @@ public class TopMenuGUI extends JMenuBar {
 	}
 	
 	
-	// Mudança de nome de usuário
+	// Mudanï¿½a de nome de usuï¿½rio
 	public void setUserName(String userName) {
 		userLabel.setText(userName);
 	}
 	
 	
-	// Adição de semestre
+	// Adiï¿½ï¿½o de semestre
 	public void addSemester (
 		SemesterController semester, 
 		LeftMenuGUI leftMenuReference, 
