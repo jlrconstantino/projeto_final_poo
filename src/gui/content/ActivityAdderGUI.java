@@ -54,7 +54,7 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 		
 		// Características do painel
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setBorder(new EmptyBorder(5, 0, 0, 0));
+		this.setBorder(new EmptyBorder(18, 0, 0, 0));
 		
 		// Rótulo do quadro
 		JLabel mainLabel = new JLabel("Adicionar Atividade");
