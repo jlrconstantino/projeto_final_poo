@@ -58,7 +58,7 @@ public class DisciplineAdderGUI extends JPanel {
 		
 		// Painel da média
 		JPanel meanPanel = new JPanel(new FlowLayout());
-		meanPanel.setBackground(Color.LIGHT_GRAY);
+		//meanPanel.setBackground(Color.LIGHT_GRAY);
 		meanPanel.setMaximumSize(new Dimension(760, 60));
 		JLabel meanLabel = new JLabel("Tipo de cálculo de média:", JLabel.CENTER);
 		String[] meanTypes = {"Média Aritmética", "Média Ponderada", "Média Harmônica"};
@@ -69,7 +69,7 @@ public class DisciplineAdderGUI extends JPanel {
 		
 		// 
 		JPanel textForm = new JPanel();
-		textForm.setBackground(Color.LIGHT_GRAY);
+		//textForm.setBackground(Color.LIGHT_GRAY);
 		textForm.setLayout(new GridLayout(0, 2, 2, 5));
 		textForm.setMaximumSize(new Dimension(760, 70));
 
@@ -101,7 +101,7 @@ public class DisciplineAdderGUI extends JPanel {
 		
 		// Painel de oferecimentos
 		offeringPanel = new JPanel();
-		offeringPanel.setBackground(Color.LIGHT_GRAY);
+		//offeringPanel.setBackground(Color.LIGHT_GRAY);
 		offeringPanel.setLayout(new BoxLayout(offeringPanel, BoxLayout.Y_AXIS));
 		offeringPanel.setMaximumSize(new Dimension(760,300));
 		JLabel offeringLabel = new JLabel("Data e horários de oferecimento:");
