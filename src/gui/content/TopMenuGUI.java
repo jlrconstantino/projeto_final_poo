@@ -2,20 +2,25 @@ package gui.content;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.io.IOException;
 import java.net.URL;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.SemesterController;
 import gui.listeners.SemesterCreatorListener;
 import gui.listeners.SemesterSelectionListener;
+import gui.listeners.UserNameChangerListener;
 import utils.ImageResizer;
 
 /** Quadro de menu superior da aplicação. */
@@ -39,6 +44,7 @@ public class TopMenuGUI extends JMenuBar {
 		LeftMenuGUI leftMenu, 
 		ContentGUI content, 
 		CentralPanelGUI centralPanel, 
+		UserNameChangerGUI userNameChangerGUI, 
 		String userName
 	) throws IOException {
 		
@@ -69,17 +75,33 @@ public class TopMenuGUI extends JMenuBar {
 		
 		// Opção de adicionar semestre
 		JMenuItem semesterCreator = new JMenuItem("Novo...");
-		semesterCreator.addActionListener(new SemesterCreatorListener(this));
+		semesterCreator.addActionListener(new SemesterCreatorListener(content, this, centralPanel));
 		semesterMenu.addSeparator();
 		semesterMenu.add(semesterCreator);
 	
-		// Mostrador de usuário
+		// Nome de usuário
 		URL userIconURL = getClass().getResource("../images/user.png");
 		ImageIcon userIcon = ImageResizer.getAndResize(userIconURL, userName, 25, 25);
 		userLabel = new JLabel(userName, userIcon, JLabel.CENTER);
 		userLabel.setForeground(Color.WHITE);
-		userLabel.setBorder(new EmptyBorder(0, 30, 0, 30));
-		this.add(userLabel, BorderLayout.LINE_END);
+		
+		// Botão de modificação de usuário
+		JButton button = new JButton();
+		button.setLayout(new BorderLayout());
+		button.setOpaque(false);
+		button.setContentAreaFilled(false);
+		button.setBorderPainted(false);
+		button.setPreferredSize(new Dimension(240, 30));
+		button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		button.add(userLabel, BorderLayout.CENTER);
+		button.addActionListener(new UserNameChangerListener(centralPanel, userNameChangerGUI, userLabel));
+		
+		// Painel de usuário
+		JPanel userPanel = new JPanel(new BorderLayout());
+		userPanel.setBackground(Color.BLACK);
+		userPanel.setMaximumSize(new Dimension(240, 30));
+		userPanel.add(button, BorderLayout.CENTER);
+		this.add(userPanel, BorderLayout.LINE_END);
 	}
 	
 	

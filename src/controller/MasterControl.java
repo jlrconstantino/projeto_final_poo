@@ -20,6 +20,7 @@ import gui.content.DisciplineAdderGUI;
 import gui.content.LeftMenuGUI;
 import gui.content.MainGUI;
 import gui.content.TopMenuGUI;
+import gui.content.UserNameChangerGUI;
 import mean.ArithmeticMeanCalculator;
 
 /** Controla a interface principal da aplicação. */
@@ -173,20 +174,25 @@ public class MasterControl {
 		// Adicionador de atividades
 		ActivityAdderGUI activityAdder = new ActivityAdderGUI();
 		
+		// Alterador de nome de usuário
+		UserNameChangerGUI userNameChanger = new UserNameChangerGUI();
+		
 		// Painel de conteúdo
 		ContentGUI content = new ContentGUI(centralPanel, activityAdder);
 		
 		// Menu lateral
 		leftMenu = new LeftMenuGUI(centralPanel, content, activityAdder);
 		
+		// Menu superior
+		topMenu = new TopMenuGUI(leftMenu, content, centralPanel, userNameChanger, "Usuário de Testes");
+		
 		// Adição do conteúdo ao painel central
 		centralPanel.addContent(content);
 		centralPanel.addDisciplineAdder(new DisciplineAdderGUI(leftMenu, centralPanel));
 		centralPanel.addActivityAdder(activityAdder);
+		centralPanel.addUserNameChanger(userNameChanger);
+		userNameChanger.setTopMenu(topMenu);
 		centralPanel.showContent();
-		
-		// Menu superior
-		topMenu = new TopMenuGUI(leftMenu, content, centralPanel, "Usuário de Testes");
 		
 		// Quadro da aplicação
 		MainGUI mainGUI = new MainGUI(topMenu, leftMenu, centralPanel);
