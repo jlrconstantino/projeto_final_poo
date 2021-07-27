@@ -31,15 +31,17 @@ public class LeftMenuGUI extends JPanel {
 	private SemesterController currentSemester;
 	private CentralPanelGUI centralPanel;
 	private ContentGUI content;
+	private ActivityAdderGUI activityAdder;
 	private JPanel disciplineDisplay;
 
 	
 	// Construtor do painel
-	public LeftMenuGUI(CentralPanelGUI centralPanel, ContentGUI content) {
+	public LeftMenuGUI(CentralPanelGUI centralPanel, ContentGUI content, ActivityAdderGUI activityAdder) {
 		
-		// Registra as referências (utilizadas para os gatilhos de botão)
+		// Registra as referências
 		this.centralPanel = centralPanel;
 		this.content = content;
+		this.activityAdder = activityAdder;
 		
 		// Mostrador em forma de lista vertical
 		this.setBorder(new EmptyBorder(70, 20, 0, 0));
@@ -142,6 +144,7 @@ public class LeftMenuGUI extends JPanel {
 	public void displaySemester(SemesterController sc) {
 		if(sc != null) {
 			this.currentSemester = sc;
+			activityAdder.setCurrentSemester(sc);
 			cleanDisciplines();
 			Iterator<Discipline> iterator = sc.getDisciplineIterator();
 			while(iterator.hasNext())
@@ -149,6 +152,8 @@ public class LeftMenuGUI extends JPanel {
 		}
 	}
 
+	
+	// Retorna o semestre atual
 	public SemesterController getCurrentSemester() {
 		return this.currentSemester;
 	}

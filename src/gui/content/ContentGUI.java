@@ -29,14 +29,14 @@ public class ContentGUI extends JPanel {
 	public static final String DISCIPLINE_DISPLAY = "discipline";
 	
 	// Construtor do painel
-	public ContentGUI(CentralPanelGUI centralPanel) {
+	public ContentGUI(CentralPanelGUI centralPanel, ActivityAdderGUI activityAdder) {
 		
 		// Layout vertical
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		// Painel superior
 		JPanel topPanel = new JPanel();
-		activities = new ActivitiesGUI(centralPanel);
+		activities = new ActivitiesGUI(centralPanel, activityAdder);
 		topPanel.add(activities);
 		this.add(topPanel);
 		

@@ -25,8 +25,9 @@ import mean.ArithmeticMeanCalculator;
 /** Controla a interface principal da aplicação. */
 public class MasterControl {
 	
-	// Interfaces gráfica usada para adicionar os semestres artificiais
+	// Interfaces gráficas necessárias como atributos
 	private static TopMenuGUI topMenu;
+	private static LeftMenuGUI leftMenu;
 	
 	// Contém todas as disciplinas que possam ser adicionadas à grade
 	private static HashMap<String, Discipline> availableDisciplines;
@@ -169,16 +170,19 @@ public class MasterControl {
 		// Painel central
 		CentralPanelGUI centralPanel = new CentralPanelGUI();
 		
+		// Adicionador de atividades
+		ActivityAdderGUI activityAdder = new ActivityAdderGUI();
+		
 		// Painel de conteúdo
-		ContentGUI content = new ContentGUI(centralPanel);
+		ContentGUI content = new ContentGUI(centralPanel, activityAdder);
 		
 		// Menu lateral
-		LeftMenuGUI leftMenu = new LeftMenuGUI(centralPanel, content);
+		leftMenu = new LeftMenuGUI(centralPanel, content, activityAdder);
 		
 		// Adição do conteúdo ao painel central
 		centralPanel.addContent(content);
 		centralPanel.addDisciplineAdder(new DisciplineAdderGUI(leftMenu, centralPanel));
-		centralPanel.addActivityAdder(new ActivityAdderGUI());
+		centralPanel.addActivityAdder(activityAdder);
 		centralPanel.showContent();
 		
 		// Menu superior
