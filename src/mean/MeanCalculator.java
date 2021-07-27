@@ -1,8 +1,7 @@
 package mean;
 
-import java.util.ArrayList;
+import java.util.Vector;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Classe de abstração de uma metodologia de cômputo de média final. 
@@ -11,11 +10,11 @@ import java.util.List;
 public abstract class MeanCalculator {
 	
 	// Valores-base
-	private List<Float> values;
+	private Vector<Float> values;
 	
 	// Construtor
 	public MeanCalculator() {
-		values = new ArrayList<Float>();
+		values = new Vector<Float>();
 	}
 	
 	/** Gera um iterador para a lista de valores-base. */
