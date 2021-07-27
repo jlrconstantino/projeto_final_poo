@@ -15,7 +15,7 @@ public class WeightedMeanCalculator extends MeanCalculator {
 	// Construtor padrão
 	public WeightedMeanCalculator() { 
 		super();
-		weights = new Vector<Float>();
+		weights = new Vector<>();
 	}
 	
 	/** Insere um novo valor e um novo peso às listas. */
@@ -46,7 +46,7 @@ public class WeightedMeanCalculator extends MeanCalculator {
 	/** Remove um valor da lista. Considera peso unitário. */
 	@Override
 	public boolean removeValue(float value) {
-		return removeValue(value, (float) 1.0);
+		return !removeValue(value, (float) 1.0);
 	}
 	
 	// Cômputo da média ponderada

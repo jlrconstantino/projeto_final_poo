@@ -21,13 +21,13 @@ public class HarmonicMeanCalculator extends MeanCalculator {
 		this.amountOfValues = amountOfValues;
 	}
 
-	public boolean addValue(int value) {
-		return(super.addValue(value));
+	public boolean addValue(float value) {
+		return (super.addValue(value));
 	}
 
 	/** Remove um valor e um peso das listas. */
-	public boolean removeValue(int value) {
-		return(super.removeValue(value));
+	public boolean removeValue(float value) {
+		return (super.removeValue(value));
 	}
 
 	

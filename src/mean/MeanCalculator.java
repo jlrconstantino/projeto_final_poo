@@ -10,11 +10,11 @@ import java.util.Iterator;
 public abstract class MeanCalculator {
 	
 	// Valores-base
-	private Vector<Float> values;
+	private final Vector<Float> values;
 	
 	// Construtor
 	public MeanCalculator() {
-		values = new Vector<Float>();
+		values = new Vector<>();
 	}
 	
 	/** Gera um iterador para a lista de valores-base. */
