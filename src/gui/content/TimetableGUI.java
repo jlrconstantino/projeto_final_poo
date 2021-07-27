@@ -6,41 +6,41 @@ import java.util.Iterator;
 import controller.SemesterController;
 import dto.TimetableRow;
 
-/** Interface de grade hor·ria */
+/** Interface de grade hor√°ria */
 public class TimetableGUI extends ContentBlockGUI {
 
 	// Constantes
 	private static final long serialVersionUID = 6L;
 	private static final String[] labels = {
-		"Hor·rio", "Segunda-feira", "TerÁa-feira", 
-		"Quarta-feira", "Quinta-feira", "Sexta-feira", "S·bado"
+		"Hor√°rio", "Segunda-feira", "Ter√ßa-feira", 
+		"Quarta-feira", "Quinta-feira", "Sexta-feira", "S√°bado"
 	};
 	
 	// Construtor do painel
 	public TimetableGUI() {
-		super("Grade Hor·ria", labels, 7);
+		super("Grade Hor√°ria", labels, 7);
 	}
 	
 	@Override
 	public void displaySemester(SemesterController sc) {
 		
-		// ValidaÁ„o e atualizaÁ„o do semestre atual
+		// Valida√ß√£o e atualiza√ß√£o do semestre atual
 		if(super.isCurrentSemester(sc) == false) {
 			super.setCurrentSemester(sc);
 			
 			// Limpeza de painel
 			super.clean();
 			
-			// IteraÁ„o ao longo dos elementos
+			// Itera√ß√£o ao longo dos elementos
 			Iterator<TimetableRow> iterator = sc.getTimetableIterator();
 			while(iterator.hasNext()) {
 				TimetableRow row = iterator.next();
 				String values[] = row.getValues();
 				
-				// CÈlula de rotulaÁ„o (hor·rio)
+				// C√©lula de rotula√ß√£o (hor√°rio)
 				super.addCell(row.getLabel(), new Color(200, 200, 200), new Color(20, 20, 20));
 				
-				// Cria cÈlulas para as siglas das disciplinas
+				// Cria c√©lulas para as siglas das disciplinas
 				for(int i = 0; i < values.length; ++i) {
 					if(values[i] != null)
 						super.addCell(values[i]);

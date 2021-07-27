@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import dto.Discipline;
 
-/** Realiza leitura, convers„o e mapeamento de um CSV, 
+/** Realiza leitura, convers√£o e mapeamento de um CSV, 
  * em formato apropriado, para diferentes disciplinas */
 public class DisciplineCSVParser {
 	
@@ -17,18 +17,18 @@ public class DisciplineCSVParser {
 	
 	/** 
 	 * A partir de um caminho especificado para um arquivo CSV, 
-	 * far· sua leitura e convers„o para uma coleÁ„o de disciplinas, 
-	 * a qual ser· inserida em um HashMap e chaveado por ID - cujo 
-	 * tipo È String.
+	 * far√° sua leitura e convers√£o para uma cole√ß√£o de disciplinas, 
+	 * a qual ser√° inserida em um HashMap e chaveado por ID - cujo 
+	 * tipo √© String.
 	 * 
 	 * Para tanto, o CSV deve estar internamente configurado de modo 
-	 * ‡ sua primeira coluna apresentar a sigla da disciplina, e ‡ 
-	 * sua ˙ltima coluna conter o nome dessa disciplina.
+	 * √† sua primeira coluna apresentar a sigla da disciplina, e √† 
+	 * sua √∫ltima coluna conter o nome dessa disciplina.
 	 * @throws IOException 
 	 * */
 	public static HashMap<String, Discipline> parse(String csvPath) throws IOException{
 		
-		// Vari·veis locais e inicializaÁ„o
+		// Vari√°veis locais e inicializa√ß√£o
 		HashMap<String, Discipline> map = new HashMap<String, Discipline>();
 		BufferedReader br = new BufferedReader(new FileReader(csvPath, StandardCharsets.UTF_8));
 		String line;
@@ -45,7 +45,7 @@ public class DisciplineCSVParser {
 			}
 		} while(line != null);
 		
-		// FinalizaÁ„o
+		// Finaliza√ß√£o
 		br.close();
 		return map;
 	}

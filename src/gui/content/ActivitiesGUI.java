@@ -23,7 +23,7 @@ public class ActivitiesGUI extends ContentBlockGUI {
 	}
 	
 	
-	// Adição de nova atividade
+	// AdiÃ§Ã£o de nova atividade
 	public void addActivity(Activity activity) {
 		super.addCell(activity.getName());
 		super.addCell (
@@ -37,7 +37,7 @@ public class ActivitiesGUI extends ContentBlockGUI {
 	}
 	
 	
-	// Implementa visualização do semestre atual
+	// Implementa visualizaÃ§Ã£o do semestre atual
 	public void displayCurrentSemester() {
 		super.clean();
 		Iterator<Activity> iterator = super.getActivitiesIterator();
@@ -58,7 +58,7 @@ public class ActivitiesGUI extends ContentBlockGUI {
 	}
 	
 	
-	// Implementa visualização das atividades de uma disciplina
+	// Implementa visualizaÃ§Ã£o das atividades de uma disciplina
 	public void displayDiscipline(Discipline discipline) {
 		super.clean();
 		Iterator<Activity> iterator = super.getActivitiesIterator (

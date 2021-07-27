@@ -6,32 +6,27 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.List;
-import java.awt.event.ActionEvent;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import generic.collections.Treap;
-import gui.listeners.AddDisciplineButtonListener;
 import gui.listeners.ConfirmDisciplineButtonListener;
 
-/** Painel de adi��o de disciplina */
+/** Painel de adição de disciplina */
 public class DisciplineAdderGUI extends JPanel {
 
+	// Atributos
+	private static final long serialVersionUID = 10L;
 	private JButton btnAdd = new JButton("Adicionar disciplina");
 	private JTextField nameField = new JTextField();
 	private JTextField codeField = new JTextField();
 	private JComboBox<String> cbMean;
-	private MainGUI mainGUI;
 	private JPanel offeringPanel;
 	private Vector<JTextField> hours = new Vector<JTextField>();
 	private Vector<JTextField> minutes = new Vector<JTextField>();
@@ -39,68 +34,66 @@ public class DisciplineAdderGUI extends JPanel {
 
 
 	// Construtor do painel
-	public DisciplineAdderGUI(MainGUI mainGUI) {
-
-		this.mainGUI = mainGUI;
+	public DisciplineAdderGUI(LeftMenuGUI leftMenu, CentralPanelGUI centralPanel) {
 
 		// Layout vertical
-		//this.setBorder(new EmptyBorder(70, 20, 0, 0));
+		this.setBorder(new EmptyBorder(65, 0, 0, 0));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		// R�tulo do quadro
-		JLabel mainLabel = new JLabel("Adicionar materia ao semestre");
+		// Rótulo do quadro
+		JLabel mainLabel = new JLabel("Adicionar disciplina ao semestre", JLabel.CENTER);
 		mainLabel.setForeground(Color.WHITE);
 		mainLabel.setFont(new Font(mainLabel.getFont().getName(), Font.BOLD, 14));
 		
-		// Painel de rotula��o do quadro
-		JPanel labelPanel = new JPanel();
+		// Painel de rotulação do quadro
+		JPanel labelPanel = new JPanel(new BorderLayout());
 		labelPanel.setBackground(Color.BLACK);
-		labelPanel.setMaximumSize(new Dimension(760, 40));
-		labelPanel.add(mainLabel);
+		labelPanel.setMaximumSize(new Dimension(760, 30));
+		labelPanel.add(mainLabel, BorderLayout.CENTER);
 		this.add(labelPanel);
 		
-		JPanel meanPanel = new JPanel();
-		meanPanel.setLayout(new FlowLayout());
+		// Painel da média
+		JPanel meanPanel = new JPanel(new FlowLayout());
+		meanPanel.setBackground(Color.LIGHT_GRAY);
 		meanPanel.setMaximumSize(new Dimension(760, 60));
-		JLabel meanLabel = new JLabel("Tipo de cálculo de média:");
-		String[] meanTypes = {"Média Aritmética", "Média Harmônica"};
+		JLabel meanLabel = new JLabel("Tipo de cálculo de média:", JLabel.CENTER);
+		String[] meanTypes = {"Média Aritmética", "Média Ponderada", "Média Harmônica"};
 		this.cbMean = new JComboBox<String>(meanTypes);
 		meanPanel.add(meanLabel);
 		meanPanel.add(cbMean);
 		this.add(meanPanel);
 		
+		// 
 		JPanel textForm = new JPanel();
-		textForm.setLayout(new GridLayout(0, 2, 5, 10));
-		textForm.setBorder(new EmptyBorder(10, 0, 0, 0));
-		textForm.setMaximumSize(new Dimension(760, 100));
+		textForm.setBackground(Color.LIGHT_GRAY);
+		textForm.setLayout(new GridLayout(0, 2, 2, 5));
+		textForm.setMaximumSize(new Dimension(760, 70));
 
 		JLabel lblDisciplineName = new JLabel("Nome da disciplina:");
 		
 		
-		nameField.setMaximumSize(new Dimension(760, 60));
+		nameField.setMaximumSize(new Dimension(760, 30));
+		nameField.add(lblDisciplineName);
 
 		textForm.add(lblDisciplineName);
 		textForm.add(this.nameField);
 
-		JLabel lblDisciplineCode = new JLabel("Codigo da disciplina:");
+		JLabel lblDisciplineCode = new JLabel("Código da disciplina:");
 		
-		codeField.setMaximumSize(new Dimension(760, 300));
+		codeField.setMaximumSize(new Dimension(760, 30));
 
-		this.btnAdd.addActionListener(new ConfirmDisciplineButtonListener(this, this.mainGUI));
+		this.btnAdd.addActionListener(new ConfirmDisciplineButtonListener(leftMenu, centralPanel, this));
 
 		//Secao de horarios de oferecimento
 		textForm.add(lblDisciplineCode);
 		textForm.add(this.codeField);
 		this.add(textForm);
 
-
+		
+		// Painel de oferecimentos
 		offeringPanel = new JPanel();
+		offeringPanel.setBackground(Color.LIGHT_GRAY);
 		offeringPanel.setLayout(new BoxLayout(offeringPanel, BoxLayout.Y_AXIS));
-		offeringPanel.setMaximumSize(new Dimension(760, 760));
-		offeringPanel.setBorder(new EmptyBorder(10, 0, 10, 0));
-		
-		
-
 		JLabel offeringLabel = new JLabel("Data e horários de oferecimento:");
 		offeringPanel.add(offeringLabel);
 		this.add(offeringPanel);

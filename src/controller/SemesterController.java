@@ -24,13 +24,13 @@ public class SemesterController {
 		timetable = new TimetableController();
 	}
 	
-	// Adi��o de uma nova disciplina
+	// Adição de uma nova disciplina
 	public boolean addDiscipline(Discipline d) {
 		
-		// Adi��o � �rvore de disciplinas
+		// Adição à árvore de disciplinas
 		boolean successFlag = disciplines.add(d);
 		
-		// Adi��o dos hor�rios de oferecimento � grade hor�ria
+		// Adição dos horários de oferecimento à grade horária
 		if(successFlag == true && d.getOfferingsIterator() != null) {
 			Iterator<DayTimeInterval> offerings = d.getOfferingsIterator();
 			while(offerings.hasNext())
@@ -39,7 +39,7 @@ public class SemesterController {
 		return successFlag;
 	}
 	
-	// Adi��o de uma atividade
+	// Adição de uma atividade
 	public boolean addActivity(Activity a) {
 		return activities.add(a);
 	}
@@ -59,7 +59,7 @@ public class SemesterController {
 		return activities.iterator(filter);
 	}
 	
-	// Retorna iterador para as linhas da grade hor�ria
+	// Retorna iterador para as linhas da grade horária
 	public Iterator<TimetableRow> getTimetableIterator(){
 		return timetable.getRowsIterator();
 	}

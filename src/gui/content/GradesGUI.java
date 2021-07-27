@@ -20,7 +20,7 @@ import dto.Activity;
 import dto.Discipline;
 import utils.TableLabeler;
 
-/** Interface das notas e médias */
+/** Interface das notas e mÃ©dias */
 public class GradesGUI extends JPanel {
 
 	// Constantes
@@ -28,11 +28,11 @@ public class GradesGUI extends JPanel {
 	private static final String[] TABLE_LABELS = {"Atividade", "Nota"};
 	private static final int ASSESSMENTS=0, WORKS=1, OTHERS=2, FINAL=3;
 	private static final String[] MEAN_LABELS = {
-		"Média das provas: ", "Média dos trabalhos: ", 
-		"Média das demais atividades: ", "Média final: "
+		"MÃ©dia das provas: ", "MÃ©dia dos trabalhos: ", 
+		"MÃ©dia das demais atividades: ", "MÃ©dia final: "
 	};
 	
-	// Referência da disciplina atual
+	// ReferÃªncia da disciplina atual
 	private Discipline currentDiscipline;
 	
 	// Tabelas de notas
@@ -40,7 +40,7 @@ public class GradesGUI extends JPanel {
 	private JPanel worksTable;
 	private JPanel othersTable;
 	
-	// Rótulos variáveis
+	// RÃ³tulos variÃ¡veis
 	private JLabel disciplineLabel;
 	private JLabel assessmentsMeanLabel;
 	private JLabel worksMeanLabel;
@@ -53,37 +53,37 @@ public class GradesGUI extends JPanel {
 		// Layout vertical
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		// Rótulo do quadro
+		// RÃ³tulo do quadro
 		JLabel mainLabel = new JLabel("Notas");
 		mainLabel.setForeground(Color.WHITE);
 		mainLabel.setFont(new Font(mainLabel.getFont().getName(), Font.BOLD, 14));
 		
-		// Painel de rotulação do quadro
+		// Painel de rotulaÃ§Ã£o do quadro
 		JPanel labelPanel = new JPanel();
 		labelPanel.setBackground(Color.BLACK);
 		labelPanel.setMaximumSize(new Dimension(760, 30));
 		labelPanel.add(mainLabel);
 		this.add(labelPanel);
 		
-		// Rótulo da disciplina
+		// RÃ³tulo da disciplina
 		disciplineLabel = new JLabel("Disciplina");
 		disciplineLabel.setForeground(new Color(230, 230, 230));
 		disciplineLabel.setFont(new Font(disciplineLabel.getFont().getName(), Font.BOLD, 12));
 		
-		// Painel de rotulação da disciplina
+		// Painel de rotulaÃ§Ã£o da disciplina
 		JPanel disciplineLabelPanel = new JPanel();
 		disciplineLabelPanel.setBackground(new Color(110, 110, 110));
 		disciplineLabelPanel.setMaximumSize(new Dimension(760, 30));
 		disciplineLabelPanel.add(disciplineLabel, JLabel.CENTER);
 		this.add(disciplineLabelPanel);
 		
-		// Painel intermediário
+		// Painel intermediÃ¡rio
 		JPanel container = new JPanel(new GridBagLayout());
 		container.setMaximumSize(new Dimension(760, 160));
 		container.setBackground(Color.LIGHT_GRAY);
 		this.add(container);
 		
-		// Ajusta a adição no contêiner
+		// Ajusta a adiÃ§Ã£o no contÃªiner
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridy = GridBagConstraints.REMAINDER;
 		gbc.insets = new Insets(0, 5, 0, 5);
@@ -93,7 +93,7 @@ public class GradesGUI extends JPanel {
 		worksTable = new JPanel(new GridLayout(0, 2));
 		othersTable = new JPanel(new GridLayout(0, 2));
 		
-		// Rótulos das médias
+		// RÃ³tulos das mÃ©dias
 		assessmentsMeanLabel = new JLabel(MEAN_LABELS[ASSESSMENTS] + "0.0");
 		assessmentsMeanLabel.setForeground(Color.WHITE);
 		worksMeanLabel = new JLabel(MEAN_LABELS[WORKS] + "0.0");
@@ -106,7 +106,7 @@ public class GradesGUI extends JPanel {
 		container.add(createGradePanel("Trabalhos", worksTable, worksMeanLabel), gbc);
 		container.add(createGradePanel("Outros", othersTable, othersMeanLabel), gbc);
 		
-		// Rótulo da nota
+		// RÃ³tulo da nota
 		finalMeanLabel = new JLabel(MEAN_LABELS[FINAL] + "0.0");
 		finalMeanLabel.setForeground(Color.WHITE);
 		
@@ -127,12 +127,12 @@ public class GradesGUI extends JPanel {
 		output.setLayout(new BoxLayout(output, BoxLayout.Y_AXIS));
 		output.setMaximumSize(new Dimension(242, 160));
 		
-		// Rótulo
+		// RÃ³tulo
 		JLabel mainLabel = new JLabel(label);
 		mainLabel.setFont(new Font(mainLabel.getFont().getName(), Font.BOLD, 12));
 		mainLabel.setForeground(Color.WHITE);
 		
-		// Painel do rótulo
+		// Painel do rÃ³tulo
 		JPanel labelPanel = new JPanel();
 		labelPanel.setPreferredSize(new Dimension(242, 30));
 		labelPanel.setMaximumSize(new Dimension(242, 30));
@@ -140,7 +140,7 @@ public class GradesGUI extends JPanel {
 		labelPanel.add(mainLabel, JLabel.CENTER);
 		output.add(labelPanel);
 		
-		// Rótulos da tabela
+		// RÃ³tulos da tabela
 		output.add(new TableLabeler(242, 28, TABLE_LABELS, 2));
 		
 		// Rolagem da tabela
@@ -150,7 +150,7 @@ public class GradesGUI extends JPanel {
 		scroller.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		output.add(scroller);
 		
-		// Mostrador da média
+		// Mostrador da mÃ©dia
 		JPanel meanLabelPanel = new JPanel();
 		meanLabelPanel.setMaximumSize(new Dimension(242, 30));
 		meanLabelPanel.setBackground(new Color(140, 140, 140));
@@ -162,7 +162,7 @@ public class GradesGUI extends JPanel {
 	}
 	
 	
-	// Criação de uma célula para a tabela
+	// CriaÃ§Ã£o de uma cÃ©lula para a tabela
 	private void addCell(JPanel table, String label) {
 		JPanel output = new JPanel();
 		output.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -172,22 +172,22 @@ public class GradesGUI extends JPanel {
 	}
 	
 	
-	// Atualiza a média das atividades do tipo "avaliação"
+	// Atualiza a mÃ©dia das atividades do tipo "avaliaÃ§Ã£o"
 	private void updateAssessmentsMean(float value) {
 		assessmentsMeanLabel.setText(MEAN_LABELS[ASSESSMENTS] + value);
 	}
 	
-	// Atualiza a média das atividades do tipo "trabalho"
+	// Atualiza a mÃ©dia das atividades do tipo "trabalho"
 	private void updateWorksMean(float value) {
 		worksMeanLabel.setText(MEAN_LABELS[WORKS] + value);
 	}
 	
-	// Atualiza a média das atividades de demais tipos
+	// Atualiza a mÃ©dia das atividades de demais tipos
 	private void updateOthersMean(float value) {
 		othersMeanLabel.setText(MEAN_LABELS[OTHERS] + value);
 	}
 	
-	// Atualiza a média final
+	// Atualiza a mÃ©dia final
 	private void updateFinalMean(Discipline d, Iterator<Activity> activities) {
 		while(activities.hasNext())
 			d.addGrade(activities.next().getGrade());
@@ -196,11 +196,11 @@ public class GradesGUI extends JPanel {
 	}
 
 	
-	// Adiciona uma atividade à tabela correspondente
+	// Adiciona uma atividade Ã  tabela correspondente
 	private void addActivity(Activity a) {
 		switch(a.getType()) {
 		
-			// Avaliação
+			// AvaliaÃ§Ã£o
 			case ASSESSMENT:
 				addCell(assessmentsTable, a.getName());
 				addCell(assessmentsTable, "" + a.getGrade());
@@ -238,8 +238,8 @@ public class GradesGUI extends JPanel {
 	}
 	
 	
-	/** Ativa visualização de uma disciplina. 
-	 * @param discipline = referência para a disciplina de interesse;
+	/** Ativa visualizaÃ§Ã£o de uma disciplina. 
+	 * @param discipline = referÃªncia para a disciplina de interesse;
 	 * @param activities = iterador para as atividades da disciplina informada. */
 	public void displayDiscipline(Discipline discipline, Iterator<Activity> activities) {
 		if(currentDiscipline != discipline) {

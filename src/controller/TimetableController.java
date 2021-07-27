@@ -7,10 +7,10 @@ import dto.TimetableRow;
 import generic.collections.Treap;
 import utils.TimetableRowSearcher;
 
-/** Respons·vel por controlar a grade hor·ria. */
+/** Respons√°vel por controlar a grade hor√°ria. */
 public class TimetableController {
 	
-	// ¡rvore de tuplas; preferÌvel ‡ lista devido ‡ verificaÁ„o customizada de existÍncia
+	// √Årvore de tuplas; prefer√≠vel √† lista devido √† verifica√ß√£o customizada de exist√™ncia
 	private static final TimetableRowSearcher customCMP = new TimetableRowSearcher();
 	private Treap<TimetableRow> rows;
 	

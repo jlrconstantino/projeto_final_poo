@@ -1,54 +1,49 @@
 package gui.listeners;
 
-import java.util.HashMap;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-import gui.content.ContentGUI;
+import gui.content.CentralPanelGUI;
 import gui.content.LeftMenuGUI;
-import gui.content.MainGUI;
-import dto.Discipline;
 
-/** Realiza a a��o do bot�o de in�cio */
+/** Realiza a ação do botão de adicionar disciplina. */
 public class AddDisciplineButtonListener implements ActionListener {
 
-	// Refer�ncia para o GUI de conte�do
-    private MainGUI centerPanelReference;
-    private LeftMenuGUI leftMenuReference;
-    private HashMap<String, Discipline> disciplines;
+	// Referências para os paineis
+    private CentralPanelGUI centralPanel;
+    private LeftMenuGUI leftMenu;
 	
 	// Construtor do gatilho
-	public AddDisciplineButtonListener(MainGUI centerPanelReference, LeftMenuGUI leftMenuReference) {
-		this.leftMenuReference = leftMenuReference;
-        this.centerPanelReference = centerPanelReference;
+	public AddDisciplineButtonListener(CentralPanelGUI centralPanel, LeftMenuGUI leftMenu) {
+        this.centralPanel = centralPanel;
+        this.leftMenu = leftMenu;
 	}
 	
-	// Muda a visualiza��o para o tipo "home"
+	// Muda a visualização para o painel de adicionar disciplina
 	@Override
 	public void actionPerformed(ActionEvent e) {
-        if(leftMenuReference.getCurrentSemester() == null)
+        if(leftMenu.getCurrentSemester() == null)
             JOptionPane.showMessageDialog(null, "Selecione um semestre para adicionar a materia primeiramente");
 		else
         {
             //String disciplineQuery =(String) JOptionPane.showInputDialog(null, "Digite o código ou nome da disciplina.");
 
-            this.centerPanelReference.showDisciplineAdder();
+            this.centralPanel.showDisciplineAdder();
             // boolean DisciplineExists = disciplines.get(disciplineQuery) == null ? false: true;
 
             // if(!DisciplineExists)
             // {
-            //     JOptionPane.showMessageDialog(centerPanelReference, "Disciplina não encontrada");
+            //     JOptionPane.showMessageDialog(centralPanel, "Disciplina não encontrada");
             //     return;
             // }
 
 
             // Discipline newDiscipline = disciplines.get(disciplineQuery);
-            // this.leftMenuReference.getCurrentSemester().addDiscipline(newDiscipline);
+            // this.leftMenu.getCurrentSemester().addDiscipline(newDiscipline);
             
-            // this.leftMenuReference.displaySemester(this.leftMenuReference.getCurrentSemester());
+            // this.leftMenu.displaySemester(this.leftMenu.getCurrentSemester());
         }
 	}
 }

@@ -11,7 +11,7 @@ import gui.content.LeftMenuGUI;
 
 public class SemesterSelectionListener implements ActionListener {
 
-	// Atributos (referências externas)
+	// Atributos (referÃªncias externas)
 	private SemesterController semesterController;
 	private LeftMenuGUI leftMenuReference;
 	private ContentGUI contentReference;
@@ -33,7 +33,7 @@ public class SemesterSelectionListener implements ActionListener {
 		this.label = label;
 	}
 	
-	// Ativa a visualização do semestre
+	// Ativa a visualizaÃ§Ã£o do semestre
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		semesterMenu.setText(label);

@@ -34,12 +34,12 @@ public abstract class ContentBlockGUI extends JPanel {
 		// Layout vertical
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		// RÛtulo superior
+		// R√≥tulo superior
 		JLabel mainLabel = new JLabel(blockLabel);
 		mainLabel.setForeground(Color.WHITE);
 		mainLabel.setFont(new Font(mainLabel.getFont().getName(), Font.BOLD, 14));
 		
-		// Painel superior de rotulaÁ„o
+		// Painel superior de rotula√ß√£o
 		JPanel labelPanel = new JPanel();
 		labelPanel.setBackground(Color.BLACK);
 		labelPanel.setPreferredSize(new Dimension(760, 30));
@@ -47,7 +47,7 @@ public abstract class ContentBlockGUI extends JPanel {
 		labelPanel.add(mainLabel, JLabel.CENTER);
 		this.add(labelPanel);
 		
-		// RÛtulos da tabela
+		// R√≥tulos da tabela
 		this.add(new TableLabeler(760, 28, tableLabels, tableColumns));
 		
 		// Tabela
@@ -55,6 +55,7 @@ public abstract class ContentBlockGUI extends JPanel {
 		
 		// Rolagem da tabela
 		JScrollPane scroller = new JScrollPane(table);
+		scroller.setPreferredSize(new Dimension(760, 190));
 		scroller.setMaximumSize(new Dimension(760, 190));
 		scroller.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.add(scroller);
@@ -66,7 +67,7 @@ public abstract class ContentBlockGUI extends JPanel {
 		table.repaint();
 	}
 	
-	// CriaÁ„o de uma cÈlula para a tabela
+	// Cria√ß√£o de uma c√©lula para a tabela
 	protected void addCell(String label) {
 		JPanel output = new JPanel();
 		output.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -75,7 +76,7 @@ public abstract class ContentBlockGUI extends JPanel {
 		table.add(output);
 	}
 	
-	// CriaÁ„o de uma cÈlula para a tabela
+	// Cria√ß√£o de uma c√©lula para a tabela
 	protected void addCell(String label, Color background, Color foreground) {
 		JPanel output = new JPanel();
 		output.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -86,7 +87,7 @@ public abstract class ContentBlockGUI extends JPanel {
 		table.add(output);
 	}
 	
-	// VerificaÁ„o de semestre atual
+	// Verifica√ß√£o de semestre atual
 	protected boolean isCurrentSemester(SemesterController sc) {
 		return currentSemester == sc;
 	}
@@ -106,6 +107,6 @@ public abstract class ContentBlockGUI extends JPanel {
 		return currentSemester.getActivitiesIterator(filter);
 	}
 	
-	// Implementa visualizaÁ„o gr·fica do semestre informado
+	// Implementa visualiza√ß√£o gr√°fica do semestre informado
 	public abstract void displaySemester(SemesterController sc);
 }

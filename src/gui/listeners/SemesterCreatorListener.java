@@ -3,7 +3,7 @@ package gui.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/** Gatilho do bot„o de adicionar semestre. */
+/** Gatilho do bot√£o de adicionar semestre. */
 public class SemesterCreatorListener implements ActionListener {
 
 	@Override

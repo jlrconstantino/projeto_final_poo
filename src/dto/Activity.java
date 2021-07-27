@@ -14,9 +14,10 @@ public class Activity implements Comparable<Activity> {
 	private ActivityType type;
 	private String status;
 	private float grade;
+	private float weight;
 	
 	// Construtores
-	public Activity(String name, LocalDate date, String disciplineId, ActivityType type, String status, float grade) {
+	public Activity(String name, LocalDate date, String disciplineId, ActivityType type, String status, float grade, float weight) {
 		super();
 		this.name = name;
 		this.date = date;
@@ -24,12 +25,16 @@ public class Activity implements Comparable<Activity> {
 		this.type = type;
 		this.status = status;
 		this.grade = grade;
+		this.weight = weight;
+	}
+	public Activity(String name, LocalDate date, String disciplineId, ActivityType type, String status, float grade) {
+		this(name, date, disciplineId, type, status, grade, 1.0f);
 	}
 	public Activity(String name, LocalDate date, String disciplineId, ActivityType type, String status) {
-		this(name, date, disciplineId, type, status, (float) 0.0);
+		this(name, date, disciplineId, type, status, 0.0f, 1.0f);
 	}
 
-	// Métodos acessores
+	// MÃ©todos acessores
 	public String getName() { return name; }
 	public LocalDate getDate() { return date; }
 	public String getDisciplineId() { return disciplineId; }
@@ -37,6 +42,8 @@ public class Activity implements Comparable<Activity> {
 	public String getStatus() { return status; }
 	public float getGrade() { return grade; }
 	public void setGrade(float grade) { this.grade = grade; }
+	public float getWeight() { return weight; }
+	public void setWeight(float weight) { this.weight = weight; }
 
 	@Override
 	public int compareTo(Activity o) {

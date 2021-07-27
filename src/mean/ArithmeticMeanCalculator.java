@@ -3,19 +3,19 @@ package mean;
 import java.util.Iterator;
 
 /**
- * Implementa o cÙmputo de mÈdias aritmÈticas a 
+ * Implementa o c√¥mputo de m√©dias aritm√©ticas a 
  * partir de lista de valores de ponto flutuante.
  * */
 public class ArithmeticMeanCalculator extends MeanCalculator {
 	
-	// Construtor padr„o
+	// Construtor padr√£o
 	public ArithmeticMeanCalculator() { super(); }
 	
-	// CÙmputo da mÈdia aritmÈtica
+	// C√¥mputo da m√©dia aritm√©tica
 	@Override 
 	public float getMean() {
 		
-		// Vari·veis locais
+		// Vari√°veis locais
 		float output = (float) 0.0;
 		int valuesAmount = 0;
 		Iterator<Float> iterator = super.getValuesIterator();
@@ -26,7 +26,7 @@ public class ArithmeticMeanCalculator extends MeanCalculator {
 			++valuesAmount;
 		}
 		
-		// Retorna a mÈdia aritmÈtica
+		// Retorna a m√©dia aritm√©tica
 		return output / valuesAmount;
 	}
 

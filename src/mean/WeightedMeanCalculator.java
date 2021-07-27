@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementa o cÙmputo de mÈdias ponderadas a 
+ * Implementa o c√¥mputo de m√©dias ponderadas a 
  * partir de lista de valores de ponto flutuante.
  * */
 public class WeightedMeanCalculator extends MeanCalculator {
@@ -12,13 +12,13 @@ public class WeightedMeanCalculator extends MeanCalculator {
 	// Pesos
 	private List<Float> weights;
 	
-	// Construtor padr„o
+	// Construtor padr√£o
 	public WeightedMeanCalculator() { 
 		super();
 		weights = new ArrayList<Float>();
 	}
 	
-	/** Insere um novo valor e um novo peso ‡s listas. */
+	/** Insere um novo valor e um novo peso √†s listas. */
 	public boolean addValue(float value, float weight) {
 		boolean output = super.addValue(value);
 		if(output == true) {
@@ -37,19 +37,19 @@ public class WeightedMeanCalculator extends MeanCalculator {
 		return output;
 	}
 	
-	/** Insere um novo valor ‡ lista. Considera peso unit·rio. */
+	/** Insere um novo valor √† lista. Considera peso unit√°rio. */
 	@Override
 	public boolean addValue(float value) {
 		return addValue(value, (float) 1.0);
 	}
 	
-	/** Remove um valor da lista. Considera peso unit·rio. */
+	/** Remove um valor da lista. Considera peso unit√°rio. */
 	@Override
 	public boolean removeValue(float value) {
 		return removeValue(value, (float) 1.0);
 	}
 	
-	// CÙmputo da mÈdia ponderada
+	// C√¥mputo da m√©dia ponderada
 	@Override 
 	public float getMean() {
 		// TODO

@@ -3,9 +3,9 @@ import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 
+import gui.content.CentralPanelGUI;
 import gui.content.DisciplineAdderGUI;
 import gui.content.LeftMenuGUI;
-import gui.content.MainGUI;
 import mean.ArithmeticMeanCalculator;
 import mean.HarmonicMeanCalculator;
 import mean.MeanCalculator;
@@ -20,19 +20,20 @@ import dto.Discipline;
 
 public class ConfirmDisciplineButtonListener implements ActionListener{
 
+	private LeftMenuGUI leftMenu;
     private DisciplineAdderGUI disciplineGUI;
+    private CentralPanelGUI centralPanel;
 
-    private MainGUI mainGui;
-
-    public ConfirmDisciplineButtonListener(DisciplineAdderGUI disciplineADDGUI, MainGUI mainGUI)
+    public ConfirmDisciplineButtonListener(LeftMenuGUI leftMenu, CentralPanelGUI centralPanel, DisciplineAdderGUI disciplineADDGUI)
     {
+    	this.leftMenu = leftMenu;
+        this.centralPanel = centralPanel;
         this.disciplineGUI = disciplineADDGUI;
-        this.mainGui = mainGUI;
     }
 
     @Override
 	public void actionPerformed(ActionEvent e) {
-
+    	
         if(this.disciplineGUI.getDisciplineName() == null || this.disciplineGUI.getDisciplineCode() == ""){
             JOptionPane.showMessageDialog(null, "Selecione um semestre para adicionar a materia primeiramente");
         }
@@ -54,7 +55,6 @@ public class ConfirmDisciplineButtonListener implements ActionListener{
             	offerings.add(new DayTimeInterval(getDayByName(newDay), interval));
             	newDiscipline.setOfferings(offerings);
             }
-            LeftMenuGUI leftMenu = this.mainGui.getLeftMenu();
             SemesterController currentSemester = leftMenu.getCurrentSemester();
             currentSemester.addDiscipline(newDiscipline);
             
@@ -63,7 +63,7 @@ public class ConfirmDisciplineButtonListener implements ActionListener{
             
         }
             this.disciplineGUI.clearInputs();
-            this.mainGui.showContent();        
+            this.centralPanel.showContent();     
     }
 
 	private MeanCalculator getMeanCalculatorByName(String selectedMeanType) {

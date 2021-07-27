@@ -1,6 +1,6 @@
 package dto;
 
-/** Linha de uma grade hor·ria. */
+/** Linha de uma grade hor√°ria. */
 public class TimetableRow implements Comparable<TimetableRow> {
 
 	// Atributos
@@ -13,14 +13,14 @@ public class TimetableRow implements Comparable<TimetableRow> {
 		values = new String[6];
 	}
 	
-	// AdiÁ„o de um novo valor
+	// Adi√ß√£o de um novo valor
 	public void addValue(String value, int pos) {
 		if(pos < 0 || pos > 6)
 			throw new IndexOutOfBoundsException();
 		values[pos] = value;
 	}
 	
-	// MÈtodos acessores
+	// M√©todos acessores
 	public String getLabel() { return label; }
 	public String[] getValues() { return values; }
 	
