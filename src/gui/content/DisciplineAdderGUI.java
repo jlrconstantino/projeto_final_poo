@@ -6,8 +6,11 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javax.swing.Action;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,6 +27,7 @@ public class DisciplineAdderGUI extends JPanel {
 	// Atributos
 	private static final long serialVersionUID = 10L;
 	private JButton btnAdd = new JButton("Adicionar disciplina");
+	private JButton btnAddOffering = new JButton("Adicionar horario de oferecimento");
 	private JTextField nameField = new JTextField();
 	private JTextField codeField = new JTextField();
 	private JComboBox<String> cbMean;
@@ -83,6 +87,11 @@ public class DisciplineAdderGUI extends JPanel {
 		codeField.setMaximumSize(new Dimension(760, 30));
 
 		this.btnAdd.addActionListener(new ConfirmDisciplineButtonListener(leftMenu, centralPanel, this));
+		this.btnAddOffering.addActionListener(new ActionListener() {
+					   public void actionPerformed(ActionEvent event) {
+					      addOffering();
+					      refreshOfferings();
+					   }});
 
 		//Secao de horarios de oferecimento
 		textForm.add(lblDisciplineCode);
@@ -94,11 +103,19 @@ public class DisciplineAdderGUI extends JPanel {
 		offeringPanel = new JPanel();
 		offeringPanel.setBackground(Color.LIGHT_GRAY);
 		offeringPanel.setLayout(new BoxLayout(offeringPanel, BoxLayout.Y_AXIS));
+		offeringPanel.setMaximumSize(new Dimension(760,300));
 		JLabel offeringLabel = new JLabel("Data e horários de oferecimento:");
 		offeringPanel.add(offeringLabel);
 		this.add(offeringPanel);
 		this.addOffering();
+		this.add(this.btnAddOffering);
 		this.add(this.btnAdd);
+	}
+	
+	public void refreshOfferings()
+	{
+		this.offeringPanel.validate();
+		this.offeringPanel.repaint();
 	}
 
 	public void addOffering()
@@ -146,7 +163,7 @@ public class DisciplineAdderGUI extends JPanel {
 		this.hours.add(txtEndHour);
 		
 		this.minutes.add(txtBegMinutes);
-		this.minutes.add(txtBegHour);
+		this.minutes.add(txtEndMinutes);
 		
 		newOfferingPanel.add(dayPanel);
 		newOfferingPanel.add(hourPanel);
@@ -201,5 +218,15 @@ public class DisciplineAdderGUI extends JPanel {
 	{
 		this.codeField.setText("");
 		this.nameField.setText("");
+		
+		for(int i = 1; i < this.days.size(); i++)
+		{
+			this.days.removeAllElements();
+			this.hours.removeAllElements();
+			this.minutes.removeAllElements();
+			this.offeringPanel.removeAll();
+		}
+		
+		this.addOffering();
 	}
 }

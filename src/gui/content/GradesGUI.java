@@ -25,7 +25,7 @@ public class GradesGUI extends JPanel {
 
 	// Constantes
 	private static final long serialVersionUID = 7L;
-	private static final String[] TABLE_LABELS = {"Atividade", "Nota"};
+	private static final String[] TABLE_LABELS = {"Atividade", "Nota", "Peso"};
 	private static final String MEAN_LABEL = new String("Média final: ");
 	
 	// Referência da disciplina atual
@@ -82,9 +82,9 @@ public class GradesGUI extends JPanel {
 		gbc.insets = new Insets(0, 5, 0, 5);
 		
 		// Tabelas de notas
-		assessmentsTable = new JPanel(new GridLayout(0, 2));
-		worksTable = new JPanel(new GridLayout(0, 2));
-		othersTable = new JPanel(new GridLayout(0, 2));
+		assessmentsTable = new JPanel(new GridLayout(0, 3));
+		worksTable = new JPanel(new GridLayout(0, 3));
+		othersTable = new JPanel(new GridLayout(0, 3));
 		
 		// Mostradores das notas
 		container.add(createGradePanel("Provas", assessmentsTable), gbc);
@@ -126,7 +126,7 @@ public class GradesGUI extends JPanel {
 		output.add(labelPanel);
 		
 		// Rótulos da tabela
-		output.add(new TableLabeler(242, 28, TABLE_LABELS, 2));
+		output.add(new TableLabeler(242, 28, TABLE_LABELS, 3));
 		
 		// Rolagem da tabela
 		JScrollPane scroller = new JScrollPane(table);
@@ -165,18 +165,21 @@ public class GradesGUI extends JPanel {
 			case ASSESSMENT:
 				addCell(assessmentsTable, a.getName());
 				addCell(assessmentsTable, "" + a.getGrade());
+				addCell(assessmentsTable, "" + a.getWeight());
 				break;
 				
 			// Trabalho
 			case WORK:
 				addCell(worksTable, a.getName());
 				addCell(worksTable, "" + a.getGrade());
+				addCell(worksTable, "" + a.getWeight());
 				break;
 				
 			// Outros
 			default:
 				addCell(othersTable, a.getName());
 				addCell(othersTable, "" + a.getGrade());
+				addCell(othersTable, "" + a.getWeight());
 				break;
 		}
 	}

@@ -41,9 +41,9 @@ public class ConfirmDisciplineButtonListener implements ActionListener{
         {
             Discipline newDiscipline = new Discipline(disciplineGUI.getDisciplineName(), disciplineGUI.getDisciplineCode());
             newDiscipline.setMeanCalculator(getMeanCalculatorByName(this.disciplineGUI.getSelectedMeanType()));
+            ArrayList<DayTimeInterval> offerings = new ArrayList<DayTimeInterval>();
             for(int i = 0; i < this.disciplineGUI.getDaysVector().size(); i++)
             {
-            	ArrayList<DayTimeInterval> offerings = new ArrayList<DayTimeInterval>();
             	String newDay = this.disciplineGUI.getDaysVector().get(i).getSelectedItem().toString();
             	
             	String interval = this.disciplineGUI.getHoursVector().get(i*2).getText();
@@ -53,8 +53,8 @@ public class ConfirmDisciplineButtonListener implements ActionListener{
             	
             	
             	offerings.add(new DayTimeInterval(getDayByName(newDay), interval));
-            	newDiscipline.setOfferings(offerings);
             }
+            newDiscipline.setOfferings(offerings);
             SemesterController currentSemester = leftMenu.getCurrentSemester();
             currentSemester.addDiscipline(newDiscipline);
             
