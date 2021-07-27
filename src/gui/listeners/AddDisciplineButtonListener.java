@@ -33,22 +33,7 @@ public class AddDisciplineButtonListener implements ActionListener {
             JOptionPane.showMessageDialog(null, "Selecione um semestre para adicionar a materia primeiramente");
 		else
         {
-            //String disciplineQuery =(String) JOptionPane.showInputDialog(null, "Digite o código ou nome da disciplina.");
-
             this.centerPanelReference.showDisciplineAdder();
-            // boolean DisciplineExists = disciplines.get(disciplineQuery) == null ? false: true;
-
-            // if(!DisciplineExists)
-            // {
-            //     JOptionPane.showMessageDialog(centerPanelReference, "Disciplina não encontrada");
-            //     return;
-            // }
-
-
-            // Discipline newDiscipline = disciplines.get(disciplineQuery);
-            // this.leftMenuReference.getCurrentSemester().addDiscipline(newDiscipline);
-            
-            // this.leftMenuReference.displaySemester(this.leftMenuReference.getCurrentSemester());
         }
 	}
 }
