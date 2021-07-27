@@ -126,29 +126,29 @@ public class MasterControl {
 		s2.addDiscipline(discipline);
 		
 		// Semestre 1: atividades
-		activity = new Activity("Prova A", LocalDate.parse("2021-07-21"), "FCI0760", ActivityType.ASSESSMENT, "Pendente");
+		activity = new Activity("Prova A", LocalDate.parse("2021-07-21"), "FCI0760", ActivityType.ASSESSMENT, "Pendente", 8.0f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Prova B", LocalDate.parse("2021-11-29"), "SEL0354", ActivityType.ASSESSMENT, "Pendente");
+		activity = new Activity("Prova B", LocalDate.parse("2021-11-29"), "SEL0354", ActivityType.ASSESSMENT, "Pendente", 7.5f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Prova C", LocalDate.parse("2021-04-02"), "7500039", ActivityType.ASSESSMENT, "Finalizada");
+		activity = new Activity("Prova C", LocalDate.parse("2021-04-02"), "7500039", ActivityType.ASSESSMENT, "Finalizada", 8.1f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Trabalho X", LocalDate.parse("2021-09-16"), "SCC0604", ActivityType.WORK, "Em progresso");
+		activity = new Activity("Trabalho X", LocalDate.parse("2021-09-16"), "SCC0604", ActivityType.WORK, "Em progresso", 2.4f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Trabalho Y", LocalDate.parse("2021-11-08"), "7500039", ActivityType.WORK, "Finalizado");
+		activity = new Activity("Trabalho Y", LocalDate.parse("2021-11-08"), "7500039", ActivityType.WORK, "Finalizado", 3.0f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Exercício 1", LocalDate.parse("2021-12-06"), "7500039", ActivityType.OTHER, "Em progresso");
+		activity = new Activity("Exercício 1", LocalDate.parse("2021-12-06"), "7500039", ActivityType.OTHER, "Em progresso", 9.0f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Exercício 2", LocalDate.parse("2021-09-24"), "SEL0354", ActivityType.OTHER, "Finalizado");
+		activity = new Activity("Exercício 2", LocalDate.parse("2021-09-24"), "SEL0354", ActivityType.OTHER, "Finalizado", 7.0f, 1.0f);
 		s1.addActivity(activity);
-		activity = new Activity("Outro", LocalDate.parse("2021-02-18"), "SMA0801", ActivityType.OTHER, "Pendente");
+		activity = new Activity("Outro", LocalDate.parse("2021-02-18"), "SMA0801", ActivityType.OTHER, "Pendente", 8.0f, 1.0f);
 		s1.addActivity(activity);
 		
 		// Semestre 2: atividades
-		activity = new Activity("Prova S", LocalDate.parse("2021-10-23"), "SMA0375", ActivityType.ASSESSMENT, "Pendente");
+		activity = new Activity("Prova S", LocalDate.parse("2021-10-23"), "SMA0375", ActivityType.ASSESSMENT, "Pendente", 9.0f);
 		s2.addActivity(activity);
-		activity = new Activity("Prova T", LocalDate.parse("2021-09-30"), "SSC0642", ActivityType.ASSESSMENT, "Finalizada");
+		activity = new Activity("Prova T", LocalDate.parse("2021-09-30"), "SSC0642", ActivityType.ASSESSMENT, "Finalizada", 10.0f);
 		s2.addActivity(activity);
-		activity = new Activity("Trabalho Z", LocalDate.parse("2021-10-14"), "FCM0117", ActivityType.WORK, "Em progresso");
+		activity = new Activity("Trabalho Z", LocalDate.parse("2021-10-14"), "FCM0117", ActivityType.WORK, "Em progresso", 7.0f);
 		s2.addActivity(activity);
 		
 		// Adição dos semestres à interface

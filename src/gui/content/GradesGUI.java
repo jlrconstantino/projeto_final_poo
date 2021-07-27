@@ -26,11 +26,7 @@ public class GradesGUI extends JPanel {
 	// Constantes
 	private static final long serialVersionUID = 7L;
 	private static final String[] TABLE_LABELS = {"Atividade", "Nota"};
-	private static final int ASSESSMENTS=0, WORKS=1, OTHERS=2, FINAL=3;
-	private static final String[] MEAN_LABELS = {
-		"Média das provas: ", "Média dos trabalhos: ", 
-		"Média das demais atividades: ", "Média final: "
-	};
+	private static final String MEAN_LABEL = new String("Média final: ");
 	
 	// Referência da disciplina atual
 	private Discipline currentDiscipline;
@@ -42,10 +38,7 @@ public class GradesGUI extends JPanel {
 	
 	// Rótulos variáveis
 	private JLabel disciplineLabel;
-	private JLabel assessmentsMeanLabel;
-	private JLabel worksMeanLabel;
-	private JLabel othersMeanLabel;
-	private JLabel finalMeanLabel;
+	private JLabel meanLabel;
 	
 	// Construtor do painel
 	public GradesGUI() {
@@ -93,34 +86,26 @@ public class GradesGUI extends JPanel {
 		worksTable = new JPanel(new GridLayout(0, 2));
 		othersTable = new JPanel(new GridLayout(0, 2));
 		
-		// Rótulos das médias
-		assessmentsMeanLabel = new JLabel(MEAN_LABELS[ASSESSMENTS] + "0.0");
-		assessmentsMeanLabel.setForeground(Color.WHITE);
-		worksMeanLabel = new JLabel(MEAN_LABELS[WORKS] + "0.0");
-		worksMeanLabel.setForeground(Color.WHITE);
-		othersMeanLabel = new JLabel(MEAN_LABELS[OTHERS] + "0.0");
-		othersMeanLabel.setForeground(Color.WHITE);
-		
 		// Mostradores das notas
-		container.add(createGradePanel("Provas", assessmentsTable, assessmentsMeanLabel), gbc);
-		container.add(createGradePanel("Trabalhos", worksTable, worksMeanLabel), gbc);
-		container.add(createGradePanel("Outros", othersTable, othersMeanLabel), gbc);
+		container.add(createGradePanel("Provas", assessmentsTable), gbc);
+		container.add(createGradePanel("Trabalhos", worksTable), gbc);
+		container.add(createGradePanel("Outros", othersTable), gbc);
 		
 		// Rótulo da nota
-		finalMeanLabel = new JLabel(MEAN_LABELS[FINAL] + "0.0");
-		finalMeanLabel.setForeground(Color.WHITE);
+		meanLabel = new JLabel(MEAN_LABEL + "0.0");
+		meanLabel.setForeground(Color.WHITE);
 		
 		// Mostrador da nota
 		JPanel finalGradePanel = new JPanel();
 		finalGradePanel.setBackground(new Color(120, 120, 120));
 		finalGradePanel.setMaximumSize(new Dimension(760, 30));
-		finalGradePanel.add(finalMeanLabel, JLabel.CENTER);
+		finalGradePanel.add(meanLabel, JLabel.CENTER);
 		this.add(finalGradePanel);
 	}
 	
 	
 	// Cria um painel mostrador de uma nota
-	private JPanel createGradePanel(String label, JPanel table, JLabel meanLabel) {
+	private JPanel createGradePanel(String label, JPanel table) {
 		
 		// Painel com layout vertical
 		JPanel output = new JPanel();
@@ -145,18 +130,10 @@ public class GradesGUI extends JPanel {
 		
 		// Rolagem da tabela
 		JScrollPane scroller = new JScrollPane(table);
-		scroller.setPreferredSize(new Dimension(242, 60));
-		scroller.setMaximumSize(new Dimension(242, 60));
+		scroller.setPreferredSize(new Dimension(242, 90));
+		scroller.setMaximumSize(new Dimension(242, 90));
 		scroller.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		output.add(scroller);
-		
-		// Mostrador da média
-		JPanel meanLabelPanel = new JPanel();
-		meanLabelPanel.setMaximumSize(new Dimension(242, 30));
-		meanLabelPanel.setBackground(new Color(140, 140, 140));
-		meanLabelPanel.add(meanLabel, JLabel.CENTER);
-		meanLabelPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		output.add(meanLabelPanel);
 		
 		return output;
 	}
@@ -172,27 +149,12 @@ public class GradesGUI extends JPanel {
 	}
 	
 	
-	// Atualiza a média das atividades do tipo "avaliação"
-	private void updateAssessmentsMean(float value) {
-		assessmentsMeanLabel.setText(MEAN_LABELS[ASSESSMENTS] + value);
-	}
-	
-	// Atualiza a média das atividades do tipo "trabalho"
-	private void updateWorksMean(float value) {
-		worksMeanLabel.setText(MEAN_LABELS[WORKS] + value);
-	}
-	
-	// Atualiza a média das atividades de demais tipos
-	private void updateOthersMean(float value) {
-		othersMeanLabel.setText(MEAN_LABELS[OTHERS] + value);
-	}
-	
 	// Atualiza a média final
-	private void updateFinalMean(Discipline d, Iterator<Activity> activities) {
+	private void updateMean(Discipline d, Iterator<Activity> activities) {
 		while(activities.hasNext())
 			d.addGrade(activities.next().getGrade());
 		float mean = d.getMean();
-		finalMeanLabel.setText(MEAN_LABELS[FINAL] + mean);
+		meanLabel.setText(MEAN_LABEL + mean);
 	}
 
 	
@@ -204,21 +166,18 @@ public class GradesGUI extends JPanel {
 			case ASSESSMENT:
 				addCell(assessmentsTable, a.getName());
 				addCell(assessmentsTable, "" + a.getGrade());
-				updateAssessmentsMean((float) 0.0);
 				break;
 				
 			// Trabalho
 			case WORK:
 				addCell(worksTable, a.getName());
 				addCell(worksTable, "" + a.getGrade());
-				updateWorksMean((float) 0.0);
 				break;
 				
 			// Outros
 			default:
 				addCell(othersTable, a.getName());
 				addCell(othersTable, "" + a.getGrade());
-				updateOthersMean((float) 0.0);
 				break;
 		}
 	}
@@ -228,13 +187,11 @@ public class GradesGUI extends JPanel {
 	private void clean() {
 		assessmentsTable.removeAll();
 		assessmentsTable.repaint();
-		updateAssessmentsMean((float) 0.0);
 		worksTable.removeAll();
 		worksTable.repaint();
-		updateWorksMean((float) 0.0);
 		othersTable.removeAll();
 		othersTable.repaint();
-		updateOthersMean((float) 0.0);
+		meanLabel.setText(MEAN_LABEL + "0.0");
 	}
 	
 	
@@ -246,9 +203,12 @@ public class GradesGUI extends JPanel {
 			currentDiscipline = discipline;
 			clean();
 			disciplineLabel.setText(discipline.getName());
-			while(activities.hasNext())
-				addActivity(activities.next());
-			updateFinalMean(discipline, activities);
+			while(activities.hasNext()) {
+				Activity a = activities.next();
+				discipline.addGrade(a.getGrade(), a.getWeight());
+				addActivity(a);
+			}
+			updateMean(discipline, activities);
 		}
 	}
 }
