@@ -225,7 +225,6 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 		statusSelector.setText("");
 		gradeSelector.setText("");
 		weightSelector.setText("");
-		disciplineSelector.removeAllItems();
 	}
 	
 	
@@ -243,6 +242,7 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 	/** Remonta o painel a partir do semestre corrente. */
 	public void rebuild() {
 		clean();
+		disciplineSelector.removeAllItems();
 		mainLabel.setText(MAIN_ADDER);
 		buttonLabel.setText(BUTTON_ADDER);
 		activity = null;
