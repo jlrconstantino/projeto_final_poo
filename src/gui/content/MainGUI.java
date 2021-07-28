@@ -19,9 +19,10 @@ public class MainGUI extends JFrame {
 		CentralPanelGUI centralPanel
 	) throws IOException {
 
-		// Tamanho e localização da janela
+		// Tamanho, localização e nome da janela
 		this.setSize(1024, 640);
 		this.setLocation(60, 60);
+		this.setTitle("Gerenciador de Atividades");
 		
 		// Operações de fechamento e de redimensionamento
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
