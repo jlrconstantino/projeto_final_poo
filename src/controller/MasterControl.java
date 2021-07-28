@@ -20,7 +20,10 @@ import gui.content.DisciplineAdderGUI;
 import gui.content.LeftMenuGUI;
 import gui.content.MainGUI;
 import gui.content.TopMenuGUI;
+import gui.content.UserNameChangerGUI;
 import mean.ArithmeticMeanCalculator;
+import mean.HarmonicMeanCalculator;
+import mean.WeightedMeanCalculator;
 
 /** Controla a interface principal da aplicação. */
 public class MasterControl {
@@ -47,7 +50,7 @@ public class MasterControl {
 		
 		// Semestre 1: disciplina 1
 		discipline = availableDisciplines.get("7500039");
-		discipline.setMeanCalculator(new ArithmeticMeanCalculator());
+		discipline.setMeanCalculator(new WeightedMeanCalculator());
 		offerings = new ArrayList<DayTimeInterval>();
 		offerings.add(new DayTimeInterval(DayOfWeek.MONDAY, "08:10 - 09:50"));
 		offerings.add(new DayTimeInterval(DayOfWeek.FRIDAY, "10:10 - 11:50"));
@@ -73,7 +76,7 @@ public class MasterControl {
 		
 		// Semestre 1: disciplina 4
 		discipline = availableDisciplines.get("SEL0354");
-		discipline.setMeanCalculator(new ArithmeticMeanCalculator());
+		discipline.setMeanCalculator(new WeightedMeanCalculator());
 		offerings = new ArrayList<DayTimeInterval>();
 		offerings.add(new DayTimeInterval(DayOfWeek.TUESDAY, "08:10 - 09:50"));
 		offerings.add(new DayTimeInterval(DayOfWeek.THURSDAY, "10:10 - 11:50"));
@@ -82,7 +85,7 @@ public class MasterControl {
 		
 		// Semestre 1: disciplina 5
 		discipline = availableDisciplines.get("SMM0318");
-		discipline.setMeanCalculator(new ArithmeticMeanCalculator());
+		discipline.setMeanCalculator(new HarmonicMeanCalculator());
 		offerings = new ArrayList<DayTimeInterval>();
 		offerings.add(new DayTimeInterval(DayOfWeek.WEDNESDAY, "14:10 - 16:00"));
 		offerings.add(new DayTimeInterval(DayOfWeek.SATURDAY, "08:10 - 09:50"));
@@ -91,7 +94,7 @@ public class MasterControl {
 		
 		// Semestre 1: disciplina 6
 		discipline = availableDisciplines.get("FCI0760");
-		discipline.setMeanCalculator(new ArithmeticMeanCalculator());
+		discipline.setMeanCalculator(new HarmonicMeanCalculator());
 		offerings = new ArrayList<DayTimeInterval>();
 		offerings.add(new DayTimeInterval(DayOfWeek.WEDNESDAY, "08:10 - 09:50"));
 		offerings.add(new DayTimeInterval(DayOfWeek.THURSDAY, "08:10 - 09:50"));
@@ -109,7 +112,7 @@ public class MasterControl {
 		
 		// Semestre 2: disciplina 2
 		discipline = availableDisciplines.get("FCM0117");
-		discipline.setMeanCalculator(new ArithmeticMeanCalculator());
+		discipline.setMeanCalculator(new WeightedMeanCalculator());
 		offerings = new ArrayList<DayTimeInterval>();
 		offerings.add(new DayTimeInterval(DayOfWeek.MONDAY, "08:10 - 09:50"));
 		offerings.add(new DayTimeInterval(DayOfWeek.FRIDAY, "16:20 - 18:00"));
@@ -118,7 +121,7 @@ public class MasterControl {
 		
 		// Semestre 2: disciplina 3
 		discipline = availableDisciplines.get("SSC0642");
-		discipline.setMeanCalculator(new ArithmeticMeanCalculator());
+		discipline.setMeanCalculator(new HarmonicMeanCalculator());
 		offerings = new ArrayList<DayTimeInterval>();
 		offerings.add(new DayTimeInterval(DayOfWeek.WEDNESDAY, "16:20 - 18:00"));
 		offerings.add(new DayTimeInterval(DayOfWeek.SATURDAY, "10:10 - 11:50"));
@@ -173,20 +176,25 @@ public class MasterControl {
 		// Adicionador de atividades
 		ActivityAdderGUI activityAdder = new ActivityAdderGUI();
 		
+		// Alterador de nome de usuário
+		UserNameChangerGUI userNameChanger = new UserNameChangerGUI();
+		
 		// Painel de conteúdo
 		ContentGUI content = new ContentGUI(centralPanel, activityAdder);
 		
 		// Menu lateral
 		leftMenu = new LeftMenuGUI(centralPanel, content, activityAdder);
 		
+		// Menu superior
+		topMenu = new TopMenuGUI(leftMenu, content, centralPanel, userNameChanger, "Usuário de Testes");
+		
 		// Adição do conteúdo ao painel central
 		centralPanel.addContent(content);
 		centralPanel.addDisciplineAdder(new DisciplineAdderGUI(leftMenu, centralPanel));
 		centralPanel.addActivityAdder(activityAdder);
+		centralPanel.addUserNameChanger(userNameChanger);
+		userNameChanger.setTopMenu(topMenu);
 		centralPanel.showContent();
-		
-		// Menu superior
-		topMenu = new TopMenuGUI(leftMenu, content, centralPanel, "Usuário de Testes");
 		
 		// Quadro da aplicação
 		MainGUI mainGUI = new MainGUI(topMenu, leftMenu, centralPanel);

@@ -35,13 +35,25 @@ public class Activity implements Comparable<Activity> {
 	}
 
 	// Métodos acessores
+	
 	public String getName() { return name; }
+	public void setName(String name) { this.name = name; }
+	
 	public LocalDate getDate() { return date; }
+	public void setDate(LocalDate date) { this.date = date; }
+	
 	public String getDisciplineId() { return disciplineId; }
+	public void setDisciplineId(String disciplineId) { this.disciplineId = disciplineId; }
+	
 	public ActivityType getType() { return type; }
+	public void setType(ActivityType type) { this.type = type; }
+	
 	public String getStatus() { return status; }
+	public void setStatus(String status) { this.status = status; }
+	
 	public float getGrade() { return grade; }
 	public void setGrade(float grade) { this.grade = grade; }
+	
 	public float getWeight() { return weight; }
 	public void setWeight(float weight) { this.weight = weight; }
 

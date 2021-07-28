@@ -58,11 +58,9 @@ public class ContentGUI extends JPanel {
 	
 	// Muda a visualização para o tipo "home"
 	public void displayHome() {
-		if(homeView == false) {
-			activities.displayCurrentSemester();
-			bottomLayout.show(bottomPanel, HOME_DISPLAY);
-			homeView = true;
-		}
+		activities.displayCurrentSemester();
+		bottomLayout.show(bottomPanel, HOME_DISPLAY);
+		homeView = true;
 	}
 	
 	

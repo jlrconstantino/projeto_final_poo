@@ -1,7 +1,7 @@
 package mean;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.Vector;
 
 /**
  * Implementa o cômputo de médias ponderadas a 
@@ -10,20 +10,20 @@ import java.util.List;
 public class WeightedMeanCalculator extends MeanCalculator {
 	
 	// Pesos
-	private List<Float> weights;
+	private final Vector<Float> weights;
 	
 	// Construtor padrão
 	public WeightedMeanCalculator() { 
 		super();
-		weights = new ArrayList<Float>();
+		weights = new Vector<>();
 	}
 	
 	/** Insere um novo valor e um novo peso às listas. */
 	public boolean addValue(float value, float weight) {
 		boolean output = super.addValue(value);
-		if(output == true) {
+		if(output) {
 			output = weights.add(weight);
-			if(output == false)
+			if(!output)
 				super.removeValue(value);
 		}
 		return output;
@@ -32,7 +32,7 @@ public class WeightedMeanCalculator extends MeanCalculator {
 	/** Remove um valor e um peso das listas. */
 	public boolean removeValue(float value, float weight) {
 		boolean output = super.removeValue(value);
-		if(output == true)
+		if(output)
 			output = weights.remove(weight);
 		return output;
 	}
@@ -46,14 +46,25 @@ public class WeightedMeanCalculator extends MeanCalculator {
 	/** Remove um valor da lista. Considera peso unitário. */
 	@Override
 	public boolean removeValue(float value) {
-		return removeValue(value, (float) 1.0);
+		return !removeValue(value, (float) 1.0);
 	}
 	
 	// Cômputo da média ponderada
 	@Override 
 	public float getMean() {
-		// TODO
-		return 0;
+
+		// Variáveis locais
+		float outputWeight = 0;
+		float output = 0;
+
+		Iterator<Float> iteratorValues = super.getValuesIterator();
+		Iterator<Float> iteratorWeights = this.getValuesIterator();
+
+		while(iteratorValues.hasNext() && iteratorWeights.hasNext()) {
+			output += iteratorValues.next() * iteratorWeights.next();
+			outputWeight += iteratorWeights.next();
+		}
+		return output/outputWeight;
 	}
 
 }

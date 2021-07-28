@@ -19,6 +19,7 @@ public class CentralPanelGUI extends JPanel {
 	private static final String SHOW_CONTENT = "C";
 	private static final String SHOW_DISCIPLINE_ADDER = "DA";
 	private static final String SHOW_ACTIVITY_ADDER = "AA";
+	private static final String SHOW_USER_NAME_CHANGER = "UN";
 
 	// Construtor 
 	public CentralPanelGUI() {
@@ -43,6 +44,11 @@ public class CentralPanelGUI extends JPanel {
 		centralPanel.add(activityAdder, SHOW_ACTIVITY_ADDER);
 	}
 	
+	// Adiciona o alterador de nome de usuário
+	public void addUserNameChanger(UserNameChangerGUI userNameChangerGUI) {
+		centralPanel.add(userNameChangerGUI, SHOW_USER_NAME_CHANGER);
+	}
+	
 	// Implementa a visualização do conteúdo do semestre
 	public void showContent() {
 		centralPanelLayout.show(centralPanel, SHOW_CONTENT);
@@ -56,5 +62,10 @@ public class CentralPanelGUI extends JPanel {
 	// Implementa a visualização do adicionador de atividades
 	public void showActivityAdder() {
 		centralPanelLayout.show(centralPanel, SHOW_ACTIVITY_ADDER);
+	}
+	
+	// Implementa a visualização do alterador de nome de usuário
+	public void showUserNameChanger() {
+		centralPanelLayout.show(centralPanel, SHOW_USER_NAME_CHANGER);
 	}
 }

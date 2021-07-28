@@ -34,6 +34,14 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 	// ID
 	private static final long serialVersionUID = 11L;
 	
+	// Atributos de apresentação de rótulo
+	private JLabel mainLabel;
+	private JLabel buttonLabel;
+	private static final String MAIN_ADDER = "Adicionar Atividade";
+	private static final String MAIN_MODIFIER = "Modificar Atividade";
+	private static final String BUTTON_ADDER = "Adicionar";
+	private static final String BUTTON_MODIFIER = "Modificar";
+	
 	// Converte datas
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
@@ -49,6 +57,9 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 	private JTextField gradeSelector;
 	private JTextField weightSelector;
 	
+	// Controle de modificações
+	private Activity activity;
+	
 	// Construtor do painel
 	public ActivityAdderGUI() {
 		
@@ -57,7 +68,7 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 		this.setBorder(new EmptyBorder(18, 0, 0, 0));
 		
 		// Rótulo do quadro
-		JLabel mainLabel = new JLabel("Adicionar Atividade");
+		mainLabel = new JLabel(MAIN_ADDER);
 		mainLabel.setForeground(Color.WHITE);
 		mainLabel.setFont(new Font(mainLabel.getFont().getName(), Font.BOLD, 14));
 		
@@ -153,7 +164,7 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 		wrapper.add(weightWrapper, gbc);
 		
 		// Botão de adicionar atividade
-		JLabel buttonLabel = new JLabel("Adicionar", JLabel.CENTER);
+		buttonLabel = new JLabel("Adicionar", JLabel.CENTER);
 		JButton adderButton = new JButton();
 		adderButton.setLayout(new BorderLayout());
 		adderButton.setBackground(new Color(160, 160, 160));
@@ -217,20 +228,49 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 	}
 	
 	
+	// Preenche os seletores com os dados de certa atividade
+	private void fill(Activity a) {
+		nameSelector.setText(a.getName());
+		dateSelector.setText(a.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		statusSelector.setText(a.getStatus());
+		gradeSelector.setText("" + a.getGrade());
+		weightSelector.setText("" + a.getWeight());
+		disciplineSelector.removeAllItems();
+	}
+	
+	
 	/** Remonta o painel a partir do semestre corrente. */
 	public void rebuild() {
 		clean();
-		disciplineSelector.removeAll();
+		disciplineSelector.removeAllItems();
+		mainLabel.setText(MAIN_ADDER);
+		buttonLabel.setText(BUTTON_ADDER);
+		activity = null;
 		Iterator<Discipline> iterator = currentSemester.getDisciplineIterator();
 		while(iterator.hasNext())
 			disciplineSelector.addItem(iterator.next().getId());
 		disciplineSelector.setSelectedIndex(0);
+	}
+	
+	
+	/** Remonta o painel a partir do semestre corrente. Ajusta-se para modificação. */
+	public void rebuild(Activity activity) {
+		fill(activity);
+		mainLabel.setText(MAIN_MODIFIER);
+		buttonLabel.setText(BUTTON_MODIFIER);
+		this.activity = activity;
+		Iterator<Discipline> iterator = currentSemester.getDisciplineIterator();
+		while(iterator.hasNext())
+			disciplineSelector.addItem(iterator.next().getId());
+		disciplineSelector.setSelectedItem(activity.getDisciplineId());
 	}
 
 	
 	// Adiciona atividade
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		// Seleciona o tipo de atividade
 		ActivityType type;
 		switch(typeSelector.getSelection().getActionCommand()) {
 			case "Avaliação":
@@ -243,16 +283,34 @@ public class ActivityAdderGUI extends JPanel implements ActionListener {
 				type = ActivityType.OTHER;
 				break;
 		}
-		Activity activity = new Activity(
-			nameSelector.getText(), 
-			LocalDate.parse(dateSelector.getText(), formatter), 
-			disciplineSelector.getSelectedItem().toString(), 
-			type, 
-			statusSelector.getText(), 
-			Float.parseFloat(gradeSelector.getText()), 
-			Float.parseFloat(weightSelector.getText())
-		);
+		
+		// Cria atividade nova se estiver no modo de adição
+		if(activity == null) {
+			activity = new Activity(
+				nameSelector.getText(), 
+				LocalDate.parse(dateSelector.getText(), formatter), 
+				disciplineSelector.getSelectedItem().toString(), 
+				type, 
+				statusSelector.getText(), 
+				Float.parseFloat(gradeSelector.getText()), 
+				Float.parseFloat(weightSelector.getText())
+			);
+		}
+		
+		// Modifica uma atividade pré-existente se não
+		else {
+			activity.setName(nameSelector.getText());
+			activity.setDate(LocalDate.parse(dateSelector.getText(), formatter));
+			activity.setDisciplineId(disciplineSelector.getSelectedItem().toString());
+			activity.setType(type);
+			activity.setStatus(statusSelector.getText());
+			activity.setGrade(Float.parseFloat(gradeSelector.getText()));
+			activity.setWeight(Float.parseFloat(weightSelector.getText()));
+		}
+		
+		// Adiciona a atividade e limpa os seletores
 		currentSemester.addActivity(activity);
+		activity = null;
 		clean();
 	}
 	
